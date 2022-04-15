@@ -14,14 +14,6 @@ class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding ?: throw NullPointerException("Binding is not initialized")
 
-    val repository : RemoteRepository = RemoteRepositoryImpl(this::repositoryCallback)
-
-    val adapter: CharacterAdapter = CharacterAdapter()
-
-    fun repositoryCallback(model: CharacterModel){
-        adapter.setData(model.results)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
@@ -31,9 +23,9 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        repository.request()
-
-        binding.recycler.adapter = adapter
+        supportFragmentManager.beginTransaction()
+            .add(binding.containerFragment.id, GeneralFragment())
+            .commit()
     }
 
     override fun onDestroy() {
