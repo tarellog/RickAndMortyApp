@@ -9,7 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class RemoteRepositoryImpl : RemoteRepository {
+class RemoteRepositoryImpl(private val model: (CharacterModel) -> Unit) : RemoteRepository {
 
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl("https://rickandmortyapi.com/api/")
@@ -22,7 +22,7 @@ class RemoteRepositoryImpl : RemoteRepository {
     private val responseCallback = object : Callback<CharacterModel> {
 
         override fun onResponse(call: Call<CharacterModel>, response: Response<CharacterModel>) {
-            Log.d("myTeg", response.body().toString())
+            response.body()?.let { model(it) }
         }
 
         override fun onFailure(call: Call<CharacterModel>, t: Throwable) {
@@ -33,5 +33,4 @@ class RemoteRepositoryImpl : RemoteRepository {
     override fun request() {
         apiRickMortyService.getApi().enqueue(responseCallback)
     }
-
 }
