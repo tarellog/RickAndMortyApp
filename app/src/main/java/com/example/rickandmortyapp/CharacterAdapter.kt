@@ -17,8 +17,10 @@ class CharacterAdapter(private val callback : (ListCharacterModel) -> Unit) : Re
     override fun getItemCount() = list.size
 
     fun setData(getLists: List<ListCharacterModel>) {
-        list.addAll(getLists)
-        notifyDataSetChanged()
+        if (list.isNotEmpty()) {
+            list.clear()
+        }
+            list.addAll(getLists)
+            notifyDataSetChanged()
     }
-
 }

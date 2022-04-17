@@ -20,7 +20,7 @@ class SecondFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         return binding.root
@@ -29,19 +29,16 @@ class SecondFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        setFragmentResultListener("key") { key, bundle ->
-            val qqq = bundle.getParcelable<ListCharacterModel>("key2")
-            binding.name.setText(qqq?.name)
+        val dataForScreen = arguments?.getParcelable<ListCharacterModel>("key")
+            binding.name.text = dataForScreen?.name
             Picasso.get()
-            .load(qqq?.image)
+            .load(dataForScreen?.image)
             .into(binding.image)
-        binding.species.text = qqq?.species
-        binding.gender.text = qqq?.gender
-        binding.status.text = qqq?.status
-        binding.location.text = qqq?.location?.name
-//        binding.episode.text = qqq?.episode.toString()
-        }
-
+        binding.species.text = dataForScreen?.species
+        binding.gender.text = dataForScreen?.gender
+        binding.status.text = dataForScreen?.status
+        binding.location.text = dataForScreen?.location?.name
+        binding.episode.text = dataForScreen?.episode.toString()
     }
 
     override fun onDestroy() {

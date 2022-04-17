@@ -30,19 +30,22 @@ class GeneralFragment : Fragment() {
 
     fun callbackData(callback: ListCharacterModel) {
 
+        val secondFragment = SecondFragment()
+        secondFragment.apply {
+            arguments = bundleOf("key" to callback)
+        }
+
         parentFragmentManager.beginTransaction()
-            .replace(R.id.container_fragment, SecondFragment())
+            .replace(R.id.container_fragment, secondFragment)
             .addToBackStack(null)
             .commit()
-
-        setFragmentResult("key", bundleOf("key2" to callback))
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentGeneralBinding.inflate(inflater, container, false)
         return binding.root
