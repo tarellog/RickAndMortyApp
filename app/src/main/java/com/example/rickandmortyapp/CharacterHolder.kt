@@ -14,15 +14,19 @@ class CharacterHolder(private val binding: ItemCharacterBinding) :
             ItemCharacterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 )
 
-    fun populate(item: ListCharacterModel){
+    fun populate(item: ListCharacterModel, callback: (ListCharacterModel) -> Unit){
 
         binding.name.text = item.name
         binding.species.text = item.species
         binding.gender.text = item.gender
-        binding.status.text = item.status
         Picasso.get()
             .load(item.image)
             .into(binding.img)
+
+        binding.root.setOnClickListener {
+            callback(item)
+        }
+
     }
 
 }

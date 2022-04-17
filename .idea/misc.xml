@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Miri/AndroidStudioProjects/RickAndMortyApp/app/src/main/res/drawable/rounded_corner.xml" value="0.2325" />
         <entry key="..\:/Users/Miri/AndroidStudioProjects/RickAndMortyApp/app/src/main/res/layout/activity_main.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/Miri/AndroidStudioProjects/RickAndMortyApp/app/src/main/res/layout/fragment_blank.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Miri/AndroidStudioProjects/RickAndMortyApp/app/src/main/res/layout/fragment_fullscreen.xml" value="0.36666666666666664" />

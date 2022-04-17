@@ -1,7 +1,11 @@
 package com.example.rickandmortyapp.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+import java.io.Serializable
 
+@Parcelize
 data class ListCharacterModel(
     @SerializedName("id")
     val id: Int,
@@ -27,4 +31,4 @@ data class ListCharacterModel(
     val url: String,
     @SerializedName("created")
     val created: String
-)
+) : Parcelable

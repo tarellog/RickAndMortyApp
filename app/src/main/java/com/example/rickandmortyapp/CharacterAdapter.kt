@@ -4,14 +4,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmortyapp.models.ListCharacterModel
 
-class CharacterAdapter : RecyclerView.Adapter<CharacterHolder>() {
+class CharacterAdapter(private val callback : (ListCharacterModel) -> Unit) : RecyclerView.Adapter<CharacterHolder>() {
 
     private val list: MutableList<ListCharacterModel> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CharacterHolder(parent)
 
     override fun onBindViewHolder(holder: CharacterHolder, position: Int) {
-        holder.populate(list[position])
+        holder.populate(list[position], callback)
     }
 
     override fun getItemCount() = list.size
