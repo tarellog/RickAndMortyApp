@@ -31,7 +31,7 @@ class GeneralFragment : Fragment() {
     fun callbackData(callback: ListCharacterModel) {
 
         parentFragmentManager.beginTransaction()
-            .add(R.id.container_fragment, SecondFragment())
+            .replace(R.id.container_fragment, SecondFragment())
             .addToBackStack(null)
             .commit()
 
