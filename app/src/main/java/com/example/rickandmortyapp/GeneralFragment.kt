@@ -46,8 +46,8 @@ class GeneralFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentGeneralBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
