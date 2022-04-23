@@ -19,10 +19,9 @@ class CharacterAdapter(
     override fun getItemCount() = list.size
 
     fun setData(getLists: List<ListCharacterModel>) {
-        if (list.isNotEmpty()) {
-            list.clear()
-        }
+        list.clear()
         list.addAll(getLists)
-        notifyDataSetChanged()
     }
+
+    fun getData() = list
 }
