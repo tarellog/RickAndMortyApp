@@ -31,4 +31,12 @@ data class ListCharacterModel(
     val url: String,
     @SerializedName("created")
     val created: String
-) : Parcelable
+) : Parcelable {
+
+    fun getEpisodeList(): List<Int> {
+        val regex =  Regex("\\d+")
+        return episode.map {
+            regex.find(it)?.value.toString().toInt()
+        }
+    }
+}
