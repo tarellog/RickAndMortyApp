@@ -6,11 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
-import com.example.rickandmortyapp.databinding.ActivityMainBinding
 import com.example.rickandmortyapp.databinding.FragmentGeneralBinding
 import com.example.rickandmortyapp.models.CharacterModel
 import com.example.rickandmortyapp.models.ListCharacterModel
+import com.example.rickandmortyapp.recycler.CharacterAdapter
 import com.example.rickandmortyapp.repository.RemoteRepository
 import com.example.rickandmortyapp.repository.RemoteRepositoryImpl
 import java.lang.NullPointerException
