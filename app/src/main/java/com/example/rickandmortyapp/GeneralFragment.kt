@@ -37,7 +37,7 @@ class GeneralFragment : Fragment() {
 
         parentFragmentManager.beginTransaction()
             .replace(R.id.container_fragment, secondFragment)
-            .addToBackStack(null)
+            .addToBackStack(this.javaClass.simpleName)
             .commit()
     }
 

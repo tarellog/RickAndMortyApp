@@ -23,11 +23,7 @@ class SecondFragment : Fragment(), CustomTitle {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
-
         (activity as MainActivity).setSupportActionBar(binding.toolbar)
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
-
         return binding.root
     }
 
@@ -44,6 +40,9 @@ class SecondFragment : Fragment(), CustomTitle {
         binding.status.text = dataForScreen?.status
         binding.location.text = dataForScreen?.location?.name
         binding.episode.text = dataForScreen?.episode.toString()
+        binding.navBackButton.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
     }
 
     override fun getTitle(): Int = R.string.character
