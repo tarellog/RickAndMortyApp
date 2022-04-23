@@ -31,8 +31,8 @@ class SecondFragment : Fragment(), CustomTitle {
         super.onStart()
 
         val dataForScreen = arguments?.getParcelable<ListCharacterModel>("key")
-            binding.name.text = dataForScreen?.name
-            Picasso.get()
+        binding.name.text = dataForScreen?.name
+        Picasso.get()
             .load(dataForScreen?.image)
             .into(binding.image)
         binding.species.text = dataForScreen?.species

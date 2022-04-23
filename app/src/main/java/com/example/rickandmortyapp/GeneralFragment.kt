@@ -20,9 +20,9 @@ class GeneralFragment : Fragment() {
     private var _binding: FragmentGeneralBinding? = null
     private val binding get() = _binding ?: throw NullPointerException("Binding is not initialized")
 
-    val repository: RemoteRepository = RemoteRepositoryImpl(this::repositoryCallback)
+    private val repository: RemoteRepository = RemoteRepositoryImpl(this::repositoryCallback)
 
-    val adapter: CharacterAdapter = CharacterAdapter(this::callbackData)
+    private val adapter: CharacterAdapter = CharacterAdapter(this::callbackData)
 
     fun repositoryCallback(model: CharacterModel) {
         adapter.setData(model.results)
