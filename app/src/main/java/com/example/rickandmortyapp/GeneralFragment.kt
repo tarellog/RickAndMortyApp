@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rickandmortyapp.databinding.FragmentGeneralBinding
 import com.example.rickandmortyapp.models.CharacterModel
 import com.example.rickandmortyapp.models.ListCharacterModel
+import com.example.rickandmortyapp.recycler.CharacterAdapter
+import com.example.rickandmortyapp.recycler.PageLoaderScrollListener
 import com.example.rickandmortyapp.repository.RemoteRepository
 import com.example.rickandmortyapp.repository.RemoteRepositoryImpl
 import java.lang.NullPointerException
@@ -21,6 +24,8 @@ class GeneralFragment : Fragment() {
     private val repository: RemoteRepository = RemoteRepositoryImpl(this::repositoryCallback)
 
     private val adapter: CharacterAdapter = CharacterAdapter(this::callbackData)
+
+    private lateinit var paginScrollListener: PageLoaderScrollListener
 
     fun repositoryCallback(model: CharacterModel) {
 
@@ -46,6 +51,7 @@ class GeneralFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGeneralBinding.inflate(inflater, container, false)
+        repository.request()
         binding.customToolbar.backButton.visibility = View.GONE
         binding.customToolbar.textTitle.text = getString(R.string.character)
         return binding.root
@@ -54,8 +60,12 @@ class GeneralFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        repository.request()
+        paginScrollListener = PageLoaderScrollListener(
+            binding.recycler.layoutManager as LinearLayoutManager,
+            repository::request
+        )
 
+        binding.recycler.addOnScrollListener(paginScrollListener)
         binding.recycler.adapter = adapter
     }
 

@@ -1,4 +1,4 @@
-package com.example.rickandmortyapp
+package com.example.rickandmortyapp.recycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
