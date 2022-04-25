@@ -46,6 +46,8 @@ class GeneralFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGeneralBinding.inflate(inflater, container, false)
+        binding.customToolbar.backButton.visibility = View.GONE
+        binding.customToolbar.textTitle.text = getString(R.string.character)
         return binding.root
     }
 

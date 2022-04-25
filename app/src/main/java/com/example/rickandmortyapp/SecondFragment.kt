@@ -38,9 +38,10 @@ class SecondFragment : Fragment() {
         binding.status.text = dataForScreen?.status
         binding.location.text = dataForScreen?.location?.name
         binding.episode.text = dataForScreen?.episode.toString()
-        binding.backButton.setOnClickListener {
+        binding.customToolbar.backButton.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
+        binding.customToolbar.textTitle.text = getString(R.string.description)
     }
 
     override fun onDestroy() {
