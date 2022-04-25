@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
-import com.example.rickandmortyapp.databinding.ActivityMainBinding
 import com.example.rickandmortyapp.databinding.FragmentGeneralBinding
 import com.example.rickandmortyapp.models.CharacterModel
 import com.example.rickandmortyapp.models.ListCharacterModel
@@ -20,11 +18,12 @@ class GeneralFragment : Fragment() {
     private var _binding: FragmentGeneralBinding? = null
     private val binding get() = _binding ?: throw NullPointerException("Binding is not initialized")
 
-    val repository: RemoteRepository = RemoteRepositoryImpl(this::repositoryCallback)
+    private val repository: RemoteRepository = RemoteRepositoryImpl(this::repositoryCallback)
 
-    val adapter: CharacterAdapter = CharacterAdapter(this::callbackData)
+    private val adapter: CharacterAdapter = CharacterAdapter(this::callbackData)
 
     fun repositoryCallback(model: CharacterModel) {
+
         adapter.setData(model.results)
     }
 
@@ -37,7 +36,7 @@ class GeneralFragment : Fragment() {
 
         parentFragmentManager.beginTransaction()
             .replace(R.id.container_fragment, secondFragment)
-            .addToBackStack(null)
+            .addToBackStack(this.javaClass.simpleName)
             .commit()
     }
 
@@ -47,7 +46,6 @@ class GeneralFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGeneralBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 

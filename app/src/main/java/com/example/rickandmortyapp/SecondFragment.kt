@@ -5,14 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.setFragmentResultListener
 import com.example.rickandmortyapp.databinding.FragmentSecondBinding
 import com.example.rickandmortyapp.models.ListCharacterModel
-import com.example.rickandmortyapp.toolbar.CustomTitle
 import com.squareup.picasso.Picasso
 import java.lang.NullPointerException
 
-class SecondFragment : Fragment(), CustomTitle {
+class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding ?: throw NullPointerException("Error is not initialized")
@@ -24,10 +22,6 @@ class SecondFragment : Fragment(), CustomTitle {
     ): View {
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
 
-        (activity as MainActivity).setSupportActionBar(binding.toolbar)
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
-
         return binding.root
     }
 
@@ -35,8 +29,8 @@ class SecondFragment : Fragment(), CustomTitle {
         super.onStart()
 
         val dataForScreen = arguments?.getParcelable<ListCharacterModel>("key")
-            binding.name.text = dataForScreen?.name
-            Picasso.get()
+        binding.name.text = dataForScreen?.name
+        Picasso.get()
             .load(dataForScreen?.image)
             .into(binding.image)
         binding.species.text = dataForScreen?.species
@@ -44,9 +38,10 @@ class SecondFragment : Fragment(), CustomTitle {
         binding.status.text = dataForScreen?.status
         binding.location.text = dataForScreen?.location?.name
         binding.episode.text = dataForScreen?.episode.toString()
+        binding.backButton.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
     }
-
-    override fun getTitle(): Int = R.string.character
 
     override fun onDestroy() {
         super.onDestroy()
