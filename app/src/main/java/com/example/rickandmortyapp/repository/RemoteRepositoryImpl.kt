@@ -33,4 +33,8 @@ class RemoteRepositoryImpl(private val model: (CharacterModel) -> Unit) : Remote
     override fun request() {
         apiRickMortyService.getApi().enqueue(responseCallback)
     }
+
+    override fun request(page: Int) {
+        apiRickMortyService.getApi(page).enqueue(responseCallback)
+    }
 }
