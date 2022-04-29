@@ -21,7 +21,6 @@ class CharacterAdapter(
     fun setData(getLists: List<ListCharacterModel>) {
         list.clear()
         list.addAll(getLists)
-        notifyDataSetChanged()
     }
 
     fun getData() = list

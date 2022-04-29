@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rickandmortyapp.databinding.FragmentGeneralBinding
 import com.example.rickandmortyapp.models.CharacterModel
 import com.example.rickandmortyapp.models.ListCharacterModel
 import com.example.rickandmortyapp.recycler.CharacterAdapter
+import com.example.rickandmortyapp.recycler.DIffUtils
 import com.example.rickandmortyapp.recycler.PageLoaderScrollListener
 import com.example.rickandmortyapp.repository.RemoteRepository
 import com.example.rickandmortyapp.repository.RemoteRepositoryImpl
@@ -28,8 +30,14 @@ class GeneralFragment : Fragment() {
     private lateinit var paginScrollListener: PageLoaderScrollListener
 
     fun repositoryCallback(model: CharacterModel) {
+        val resultCharacterList = model.results.toMutableList().apply {
+            addAll(0, adapter.getData())
+        }.toList()
+        val productDiffUtilCallback = DIffUtils(adapter.getData(), resultCharacterList)
+        val productDiffResult = DiffUtil.calculateDiff(productDiffUtilCallback)
 
-        adapter.setData(model.results)
+        adapter.setData(resultCharacterList)
+        productDiffResult.dispatchUpdatesTo(adapter)
     }
 
     fun callbackData(callback: ListCharacterModel) {
