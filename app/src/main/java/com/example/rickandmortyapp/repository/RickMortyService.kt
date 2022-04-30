@@ -7,6 +7,5 @@ import retrofit2.http.Query
 
 interface RickMortyService {
     @GET("character")
-    fun getApi(): Call<CharacterModel>
     fun getApi(@Query("page") page: Int = 1): Call<CharacterModel>
 }
