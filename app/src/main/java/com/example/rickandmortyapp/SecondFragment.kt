@@ -37,7 +37,7 @@ class SecondFragment : Fragment() {
         binding.gender.text = dataForScreen?.gender
         binding.status.text = dataForScreen?.status
         binding.location.text = dataForScreen?.location?.name
-        binding.episode.text = dataForScreen?.episode.toString()
+        binding.episode.text = dataForScreen?.getEpisodeList().toString()
         binding.customToolbar.backButton.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
