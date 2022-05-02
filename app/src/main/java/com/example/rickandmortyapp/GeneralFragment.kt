@@ -23,22 +23,11 @@ class GeneralFragment : Fragment() {
     private var _binding: FragmentGeneralBinding? = null
     private val binding get() = _binding ?: throw NullPointerException("Binding is not initialized")
 
-    private val repository: RemoteRepository = RemoteRepositoryImpl(this::repositoryCallback)
+    private val repository: RemoteRepository = RemoteRepositoryImpl()
 
     private val adapter: CharacterAdapter = CharacterAdapter(this::callbackData)
 
     private lateinit var paginScrollListener: PageLoaderScrollListener
-
-    fun repositoryCallback(model: CharacterModel) {
-        val resultCharacterList = model.results.toMutableList().apply {
-            addAll(0, adapter.getData())
-        }.toList()
-        val productDiffUtilCallback = DIffUtils(adapter.getData(), resultCharacterList)
-        val productDiffResult = DiffUtil.calculateDiff(productDiffUtilCallback)
-
-        adapter.setData(resultCharacterList)
-        productDiffResult.dispatchUpdatesTo(adapter)
-    }
 
     fun callbackData(callback: ListCharacterModel) {
 
@@ -59,22 +48,33 @@ class GeneralFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGeneralBinding.inflate(inflater, container, false)
-        repository.request()
+        loadData()
         binding.customToolbar.backButton.visibility = View.GONE
         binding.customToolbar.textTitle.text = getString(R.string.character)
-        return binding.root
-    }
-
-    override fun onStart() {
-        super.onStart()
-
         paginScrollListener = PageLoaderScrollListener(
             binding.recycler.layoutManager as LinearLayoutManager,
-            repository::request
+            this::loadData
         )
 
         binding.recycler.addOnScrollListener(paginScrollListener)
         binding.recycler.adapter = adapter
+        return binding.root
+    }
+
+    private fun loadData(page: Int = 1) {
+        repository.request(page)
+            .map {
+                it.toMutableList().apply {
+                    addAll(0, adapter.getData())
+                }.toList()
+            }
+            .subscribe({
+                val productDiffUtilCallback = DIffUtils(adapter.getData(), it)
+                val productDiffResult = DiffUtil.calculateDiff(productDiffUtilCallback)
+
+                adapter.setData(it)
+                productDiffResult.dispatchUpdatesTo(adapter)
+            }) {}
     }
 
     override fun onDestroy() {
