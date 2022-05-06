@@ -29,14 +29,8 @@ class GeneralFragment : Fragment() {
     private lateinit var paginScrollListener: PageLoaderScrollListener
 
     fun callbackData(callback: ListCharacterModel) {
-
-        val secondFragment = SecondFragment()
-        secondFragment.apply {
-            arguments = bundleOf("key" to callback)
-        }
-
         parentFragmentManager.beginTransaction()
-            .replace(R.id.container_fragment, secondFragment)
+            .replace(R.id.container_fragment, SecondFragment.newInstance(callback))
             .addToBackStack(this.javaClass.simpleName)
             .commit()
     }
@@ -82,4 +76,9 @@ class GeneralFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
+
+    companion object{
+        const val DATA_KEY = "key"
+    }
+
 }

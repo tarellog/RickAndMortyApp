@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import com.example.rickandmortyapp.GeneralFragment.Companion.DATA_KEY
 import com.example.rickandmortyapp.databinding.FragmentSecondBinding
 import com.example.rickandmortyapp.models.ListCharacterModel
 import com.squareup.picasso.Picasso
@@ -14,6 +16,15 @@ class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding ?: throw NullPointerException("Error is not initialized")
+
+    companion object {
+        fun newInstance(dataSecondFragment: ListCharacterModel): SecondFragment{
+            return SecondFragment().apply {
+                arguments = bundleOf(DATA_KEY to dataSecondFragment)
+            }
+        }
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,7 +39,7 @@ class SecondFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val dataForScreen = arguments?.getParcelable<ListCharacterModel>("key")
+        val dataForScreen = arguments?.getParcelable<ListCharacterModel>(DATA_KEY)
         binding.name.text = dataForScreen?.name
         Picasso.get()
             .load(dataForScreen?.image)
