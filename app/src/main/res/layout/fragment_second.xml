@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#319781"
     android:orientation="vertical"
-    tools:context=".SecondFragment">
+    tools:context=".ui.SecondFragment">
 
     <include
         android:id="@+id/custom_toolbar"

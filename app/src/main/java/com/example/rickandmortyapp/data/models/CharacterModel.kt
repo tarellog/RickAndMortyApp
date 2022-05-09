@@ -1,4 +1,4 @@
-package com.example.rickandmortyapp.models
+package com.example.rickandmortyapp.data.models
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,10 +1,10 @@
-package com.example.rickandmortyapp.recycler
+package com.example.rickandmortyapp.ui.recycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmortyapp.databinding.ItemCharacterBinding
-import com.example.rickandmortyapp.models.ListCharacterModel
+import com.example.rickandmortyapp.data.models.ListCharacterModel
 import com.squareup.picasso.Picasso
 
 class CharacterHolder(

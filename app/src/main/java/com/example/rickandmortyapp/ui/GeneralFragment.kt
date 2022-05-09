@@ -1,20 +1,19 @@
-package com.example.rickandmortyapp
+package com.example.rickandmortyapp.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.rickandmortyapp.R
 import com.example.rickandmortyapp.databinding.FragmentGeneralBinding
-import com.example.rickandmortyapp.models.ListCharacterModel
-import com.example.rickandmortyapp.recycler.CharacterAdapter
-import com.example.rickandmortyapp.recycler.DIffUtils
-import com.example.rickandmortyapp.recycler.PageLoaderScrollListener
-import com.example.rickandmortyapp.repository.RemoteRepository
-import com.example.rickandmortyapp.repository.RemoteRepositoryImpl
+import com.example.rickandmortyapp.data.models.ListCharacterModel
+import com.example.rickandmortyapp.ui.recycler.CharacterAdapter
+import com.example.rickandmortyapp.ui.recycler.DIffUtils
+import com.example.rickandmortyapp.ui.recycler.PageLoaderScrollListener
 import java.lang.NullPointerException
 
 class GeneralFragment : Fragment() {
@@ -22,13 +21,13 @@ class GeneralFragment : Fragment() {
     private var _binding: FragmentGeneralBinding? = null
     private val binding get() = _binding ?: throw NullPointerException("Binding is not initialized")
 
-    private val repository: RemoteRepository = RemoteRepositoryImpl()
+    private lateinit var viewModel: GeneralViewModel
 
-    private val adapter: CharacterAdapter = CharacterAdapter(this::callbackData)
+    private lateinit var adapter: CharacterAdapter
 
     private lateinit var paginScrollListener: PageLoaderScrollListener
 
-    fun callbackData(callback: ListCharacterModel) {
+    private fun callbackData(callback: ListCharacterModel) {
         parentFragmentManager.beginTransaction()
             .replace(R.id.container_fragment, SecondFragment.newInstance(callback))
             .addToBackStack(this.javaClass.simpleName)
@@ -41,35 +40,30 @@ class GeneralFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGeneralBinding.inflate(inflater, container, false)
-        loadData()
+
+        viewModel = ViewModelProvider(this).get(GeneralViewModel::class.java)
+
+        adapter = CharacterAdapter(this::callbackData)
 
         binding.customToolbar.backButton.visibility = View.GONE
         binding.customToolbar.textTitle.text = getString(R.string.character)
 
         paginScrollListener = PageLoaderScrollListener(
             binding.recycler.layoutManager as LinearLayoutManager,
-            this::loadData
+            viewModel::loadData
         )
-
         binding.recycler.addOnScrollListener(paginScrollListener)
         binding.recycler.adapter = adapter
-        return binding.root
-    }
 
-    private fun loadData(page: Int = 1) {
-        repository.request(page)
-            .map {
-                it.toMutableList().apply {
-                    addAll(0, adapter.getData())
-                }.toList()
-            }
-            .subscribe({
+        viewModel.listCharacterModel.observe(viewLifecycleOwner) {
                 val productDiffUtilCallback = DIffUtils(adapter.getData(), it)
                 val productDiffResult = DiffUtil.calculateDiff(productDiffUtilCallback)
 
                 adapter.setData(it)
                 productDiffResult.dispatchUpdatesTo(adapter)
-            }) {}
+        }
+
+        return binding.root
     }
 
     override fun onDestroy() {

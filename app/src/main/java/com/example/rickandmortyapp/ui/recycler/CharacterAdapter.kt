@@ -1,8 +1,8 @@
-package com.example.rickandmortyapp.recycler
+package com.example.rickandmortyapp.ui.recycler
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rickandmortyapp.models.ListCharacterModel
+import com.example.rickandmortyapp.data.models.ListCharacterModel
 
 class CharacterAdapter(
     private val callback: (ListCharacterModel) -> Unit
