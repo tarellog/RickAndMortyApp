@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Miri/AndroidStudioProjects/RickAndMortyApp/app/src/main/res/layout/fragment_general.xml" value="0.36102564102564105" />
+        <entry key="..\:/Users/Miri/AndroidStudioProjects/RickAndMortyApp/app/src/main/res/layout/fragment_second.xml" value="0.36102564102564105" />
         <entry key="..\:/Users/Miri/AndroidStudioProjects/RickAndMortyApp/app/src/main/res/layout/item_episodes.xml" value="0.36666666666666664" />
       </map>
     </option>

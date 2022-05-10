@@ -44,16 +44,19 @@ class GeneralFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(GeneralViewModel::class.java)
 
         adapter = CharacterAdapter(this::callbackData)
+        binding.recycler.adapter = adapter
 
+        //toolbar
         binding.customToolbar.backButton.visibility = View.GONE
         binding.customToolbar.textTitle.text = getString(R.string.character)
 
+        //pagination
         paginScrollListener = PageLoaderScrollListener(
             binding.recycler.layoutManager as LinearLayoutManager,
             viewModel::loadData
         )
         binding.recycler.addOnScrollListener(paginScrollListener)
-        binding.recycler.adapter = adapter
+
 
         viewModel.listCharacterModel.observe(viewLifecycleOwner) {
                 val productDiffUtilCallback = DIffUtils(adapter.getData(), it)
