@@ -55,15 +55,8 @@ class SecondFragment : Fragment() {
         super.onStart()
 
         viewModel.mainInfoLiveData.observe(viewLifecycleOwner) {
-            binding.name.text = it.name
-            Picasso.get()
-                .load(it.image)
-                .into(binding.image)
-            binding.species.text = it.species
-            binding.gender.text = it.gender
-            binding.status.text = it.status
-            binding.location.text = it.location
-//            binding.episode.text = it.episodes.toString()
+            adapter.setData(it)
+            adapter.notifyDataSetChanged()
         }
 
         //toolbar

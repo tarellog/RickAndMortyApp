@@ -16,7 +16,6 @@ class CharacterHolder(
     )
 
     fun populate(item: ListCharacterModel, callback: (ListCharacterModel) -> Unit) {
-
         binding.name.text = item.name
         binding.species.text = item.species
         binding.gender.text = item.gender
