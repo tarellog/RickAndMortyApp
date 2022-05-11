@@ -57,13 +57,12 @@ class GeneralFragment : Fragment() {
         )
         binding.recycler.addOnScrollListener(paginScrollListener)
 
-
         viewModel.listCharacterModel.observe(viewLifecycleOwner) {
-                val productDiffUtilCallback = DIffUtils(adapter.getData(), it)
-                val productDiffResult = DiffUtil.calculateDiff(productDiffUtilCallback)
+            val productDiffUtilCallback = DIffUtils(adapter.getData(), it)
+            val productDiffResult = DiffUtil.calculateDiff(productDiffUtilCallback)
 
-                adapter.setData(it)
-                productDiffResult.dispatchUpdatesTo(adapter)
+            adapter.setData(it)
+            productDiffResult.dispatchUpdatesTo(adapter)
         }
 
         return binding.root
@@ -74,7 +73,7 @@ class GeneralFragment : Fragment() {
         _binding = null
     }
 
-    companion object{
+    companion object {
         const val DATA_KEY = "key"
     }
 

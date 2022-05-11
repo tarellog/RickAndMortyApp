@@ -73,6 +73,10 @@ class SecondFragment : Fragment() {
         binding.customToolbar.textTitle.text = getString(R.string.description)
     }
 
+    fun loadData() {
+
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

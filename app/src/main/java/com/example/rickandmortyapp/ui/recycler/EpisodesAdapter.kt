@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmortyapp.data.models.EpisodeModel
 
-class EpisodesAdapter: RecyclerView.Adapter<EpisodesHolder>() {
+class EpisodesAdapter : RecyclerView.Adapter<EpisodesHolder>() {
 
     private val list: MutableList<EpisodeModel> = mutableListOf()
 
@@ -16,7 +16,7 @@ class EpisodesAdapter: RecyclerView.Adapter<EpisodesHolder>() {
 
     override fun getItemCount() = list.size
 
-    fun setData(getLists: List<EpisodeModel>){
+    fun setData(getLists: List<EpisodeModel>) {
         list.addAll(getLists)
     }
 

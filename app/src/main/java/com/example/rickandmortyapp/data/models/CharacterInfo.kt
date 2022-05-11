@@ -7,5 +7,5 @@ data class CharacterInfo(
     val gender: String,
     val status: String,
     val location: String,
-    val episodes: List<String>
+    val episodes: List<EpisodeModel>
 )

@@ -28,7 +28,7 @@ class SecondViewModel : ViewModel() {
                         data.gender,
                         data.status,
                         data.location.name,
-                        it.map { it.name }
+                        it
                     )
                 }
                 .subscribe({
