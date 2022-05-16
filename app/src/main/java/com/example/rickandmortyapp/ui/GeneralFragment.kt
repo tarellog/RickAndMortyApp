@@ -1,5 +1,6 @@
 package com.example.rickandmortyapp.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -32,6 +33,11 @@ class GeneralFragment : Fragment() {
             .replace(R.id.container_fragment, SecondFragment.newInstance(callback))
             .addToBackStack(this.javaClass.simpleName)
             .commit()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity() as MainActivity).getComponent().inject(this)
     }
 
     override fun onCreateView(

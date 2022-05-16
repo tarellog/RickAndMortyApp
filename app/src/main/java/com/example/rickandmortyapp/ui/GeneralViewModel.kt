@@ -6,10 +6,13 @@ import androidx.lifecycle.ViewModel
 import com.example.rickandmortyapp.data.models.ListCharacterModel
 import com.example.rickandmortyapp.domain.RemoteRepository
 import com.example.rickandmortyapp.data.RemoteRepositoryImpl
+import javax.inject.Inject
 
-class GeneralViewModel : ViewModel() {
+class GeneralViewModel @Inject constructor(
+    private val repository: RemoteRepository
+) : ViewModel() {
 
-    val repository: RemoteRepository = RemoteRepositoryImpl()
+//    val repository: RemoteRepository = RemoteRepositoryImpl()
 
     private var _listCharacterModel = MutableLiveData<List<ListCharacterModel>>()
     val listCharacterModel: LiveData<List<ListCharacterModel>> get() = _listCharacterModel

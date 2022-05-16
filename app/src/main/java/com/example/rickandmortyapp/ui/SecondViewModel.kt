@@ -7,12 +7,14 @@ import androidx.lifecycle.ViewModel
 import com.example.rickandmortyapp.data.models.CharacterInfo
 import com.example.rickandmortyapp.data.models.ListCharacterModel
 import com.example.rickandmortyapp.domain.RemoteRepository
-import com.example.rickandmortyapp.data.RemoteRepositoryImpl
 import com.example.rickandmortyapp.domain.BaseModel
+import javax.inject.Inject
 
-class SecondViewModel : ViewModel() {
+class SecondViewModel @Inject constructor(
+    private val repository: RemoteRepository
+) : ViewModel() {
 
-    val repository: RemoteRepository = RemoteRepositoryImpl()
+//    val repository: RemoteRepository = RemoteRepositoryImpl()
 
     private var _mainInfoLiveData = MutableLiveData<List<BaseModel>>()
     val mainInfoLiveData: LiveData<List<BaseModel>> get() = _mainInfoLiveData
@@ -23,14 +25,16 @@ class SecondViewModel : ViewModel() {
             repository.getEpisodes(data.getEpisodeList())
                 .subscribe({
                     val resultList: MutableList<BaseModel> = it.toMutableList()
-                    resultList.add(0, CharacterInfo(
-                        data.name,
-                        data.image,
-                        data.species,
-                        data.gender,
-                        data.status,
-                        data.location.name
-                    ))
+                    resultList.add(
+                        0, CharacterInfo(
+                            data.name,
+                            data.image,
+                            data.species,
+                            data.gender,
+                            data.status,
+                            data.location.name
+                        )
+                    )
                     _mainInfoLiveData.postValue(resultList)
                 }) {}
         }
