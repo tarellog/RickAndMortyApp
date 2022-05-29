@@ -6,4 +6,5 @@
     <string name="character">Character</string>
     <string name="description">Description character</string>
     <string name="episode">Episode: </string>
+    <string name="episod">Episod: %1$d </string>
 </resources>

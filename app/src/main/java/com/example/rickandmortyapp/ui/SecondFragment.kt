@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.rickandmortyapp.R
 import com.example.rickandmortyapp.ui.GeneralFragment.Companion.DATA_KEY
@@ -20,7 +21,9 @@ class SecondFragment : Fragment() {
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding ?: throw NullPointerException("Error is not initialized")
 
-    private lateinit var viewModel: SecondViewModel
+    private val viewModel: SecondViewModel by viewModels {
+        GeneralFragment.getApp().appComponent.viewModelFactory()
+    }
 
     private lateinit var adapter: EpisodesAdapter
 
@@ -38,8 +41,6 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
-
-        viewModel = ViewModelProvider(this).get(SecondViewModel::class.java)
 
         adapter = EpisodesAdapter()
         binding.episodeRecycler.adapter = adapter

@@ -6,16 +6,20 @@ import androidx.lifecycle.ViewModel
 import com.example.rickandmortyapp.data.models.ListCharacterModel
 import com.example.rickandmortyapp.domain.RemoteRepository
 import com.example.rickandmortyapp.data.RemoteRepositoryImpl
+import com.example.rickandmortyapp.data.RickMortyService
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import javax.inject.Inject
 
-class GeneralViewModel @Inject constructor(
-    private val repository: RemoteRepository
-) : ViewModel() {
-
-//    val repository: RemoteRepository = RemoteRepositoryImpl()
+class GeneralViewModel @Inject constructor(val repository: RemoteRepository) : ViewModel() {
 
     private var _listCharacterModel = MutableLiveData<List<ListCharacterModel>>()
     val listCharacterModel: LiveData<List<ListCharacterModel>> get() = _listCharacterModel
+
+    private var _adapterData =
+        MutableSharedFlow<ListCharacterModel>(0, 1, BufferOverflow.DROP_OLDEST)
+    val adapterData get() = _adapterData.asSharedFlow()
 
     init {
         loadData()
@@ -29,6 +33,10 @@ class GeneralViewModel @Inject constructor(
                 }.toList()
                 _listCharacterModel.postValue(resultList)
             }) {}
+    }
+
+    fun callbackData(callback: ListCharacterModel) {
+        _adapterData.tryEmit(callback)
     }
 
 }

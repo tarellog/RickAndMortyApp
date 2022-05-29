@@ -6,7 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rickandmortyapp.R
@@ -15,29 +16,27 @@ import com.example.rickandmortyapp.data.models.ListCharacterModel
 import com.example.rickandmortyapp.ui.recycler.CharacterAdapter
 import com.example.rickandmortyapp.ui.recycler.DIffUtils
 import com.example.rickandmortyapp.ui.recycler.PageLoaderScrollListener
+import kotlinx.coroutines.flow.collect
 import java.lang.NullPointerException
+import javax.inject.Inject
 
-class GeneralFragment : Fragment() {
+class GeneralFragment : Fragment(){
 
     private var _binding: FragmentGeneralBinding? = null
     private val binding get() = _binding ?: throw NullPointerException("Binding is not initialized")
 
-    private lateinit var viewModel: GeneralViewModel
+    private val viewModel: GeneralViewModel by viewModels {
+        getApp().appComponent.viewModelFactory()
+    }
 
     private lateinit var adapter: CharacterAdapter
 
     private lateinit var paginScrollListener: PageLoaderScrollListener
 
-    private fun callbackData(callback: ListCharacterModel) {
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.container_fragment, SecondFragment.newInstance(callback))
-            .addToBackStack(this.javaClass.simpleName)
-            .commit()
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity() as MainActivity).getComponent().inject(this)
+
+        getApp().appComponent.inject(this)
     }
 
     override fun onCreateView(
@@ -47,9 +46,7 @@ class GeneralFragment : Fragment() {
     ): View {
         _binding = FragmentGeneralBinding.inflate(inflater, container, false)
 
-        viewModel = ViewModelProvider(this).get(GeneralViewModel::class.java)
-
-        adapter = CharacterAdapter(this::callbackData)
+        adapter = CharacterAdapter(viewModel::callbackData)
         binding.recycler.adapter = adapter
 
         //toolbar
@@ -63,15 +60,28 @@ class GeneralFragment : Fragment() {
         )
         binding.recycler.addOnScrollListener(paginScrollListener)
 
-        viewModel.listCharacterModel.observe(viewLifecycleOwner) {
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.adapterData.collect {
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.container_fragment, SecondFragment.newInstance(it))
+                    .addToBackStack(null)
+                    .commit()  }
+        }
+
+        viewModel.listCharacterModel.observe(viewLifecycleOwner){
             val productDiffUtilCallback = DIffUtils(adapter.getData(), it)
             val productDiffResult = DiffUtil.calculateDiff(productDiffUtilCallback)
 
             adapter.setData(it)
             productDiffResult.dispatchUpdatesTo(adapter)
-        }
 
-        return binding.root
+        }
     }
 
     override fun onDestroy() {
@@ -80,6 +90,13 @@ class GeneralFragment : Fragment() {
     }
 
     companion object {
+
+        var instance: App = App()
+
+        fun getApp() : App {
+            return instance
+        }
+
         const val DATA_KEY = "key"
     }
 

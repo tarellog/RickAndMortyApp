@@ -14,8 +14,6 @@ class SecondViewModel @Inject constructor(
     private val repository: RemoteRepository
 ) : ViewModel() {
 
-//    val repository: RemoteRepository = RemoteRepositoryImpl()
-
     private var _mainInfoLiveData = MutableLiveData<List<BaseModel>>()
     val mainInfoLiveData: LiveData<List<BaseModel>> get() = _mainInfoLiveData
 
