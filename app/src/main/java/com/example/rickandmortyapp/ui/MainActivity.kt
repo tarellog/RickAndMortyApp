@@ -14,9 +14,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportFragmentManager.beginTransaction()
-            .add(binding.containerFragment.id, GeneralFragment())
-            .commit()
     }
 
     override fun onDestroy() {

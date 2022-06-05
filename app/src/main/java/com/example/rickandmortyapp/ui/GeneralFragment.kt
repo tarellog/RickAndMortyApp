@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rickandmortyapp.R
@@ -66,22 +68,19 @@ class GeneralFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.adapterData.collect {
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, SecondFragment.newInstance(it))
-                    .addToBackStack(null)
-                    .commit()  }
-        }
-
         viewModel.listCharacterModel.observe(viewLifecycleOwner){
             val productDiffUtilCallback = DIffUtils(adapter.getData(), it)
             val productDiffResult = DiffUtil.calculateDiff(productDiffUtilCallback)
 
             adapter.setData(it)
             productDiffResult.dispatchUpdatesTo(adapter)
-
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.adapterData.collect {
+                findNavController().navigate(R.id.action_generalFragment_to_secondFragment, SecondFragment.dataForScreen(it))}
+        }
+
     }
 
     override fun onDestroy() {

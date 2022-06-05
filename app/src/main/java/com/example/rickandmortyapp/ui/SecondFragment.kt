@@ -7,13 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.rickandmortyapp.R
 import com.example.rickandmortyapp.ui.GeneralFragment.Companion.DATA_KEY
 import com.example.rickandmortyapp.databinding.FragmentSecondBinding
 import com.example.rickandmortyapp.data.models.ListCharacterModel
 import com.example.rickandmortyapp.ui.recycler.EpisodesAdapter
-import com.squareup.picasso.Picasso
 import java.lang.NullPointerException
 
 class SecondFragment : Fragment() {
@@ -28,11 +27,7 @@ class SecondFragment : Fragment() {
     private lateinit var adapter: EpisodesAdapter
 
     companion object {
-        fun newInstance(dataSecondFragment: ListCharacterModel): SecondFragment {
-            return SecondFragment().apply {
-                arguments = bundleOf(DATA_KEY to dataSecondFragment)
-            }
-        }
+        fun dataForScreen(model: ListCharacterModel) = bundleOf(DATA_KEY to model)
     }
 
     override fun onCreateView(
@@ -44,6 +39,12 @@ class SecondFragment : Fragment() {
 
         adapter = EpisodesAdapter()
         binding.episodeRecycler.adapter = adapter
+
+        //toolbar
+        binding.customToolbar.backButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.customToolbar.textTitle.text = getString(R.string.description)
 
         arguments?.let {
             viewModel.initByBundle(it)
@@ -59,16 +60,6 @@ class SecondFragment : Fragment() {
             adapter.setData(it)
             adapter.notifyDataSetChanged()
         }
-
-        //toolbar
-        binding.customToolbar.backButton.setOnClickListener {
-            parentFragmentManager.popBackStack()
-        }
-        binding.customToolbar.textTitle.text = getString(R.string.description)
-    }
-
-    fun loadData() {
-
     }
 
     override fun onDestroy() {
