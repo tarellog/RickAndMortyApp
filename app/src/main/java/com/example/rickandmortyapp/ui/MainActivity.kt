@@ -1,9 +1,9 @@
 package com.example.rickandmortyapp.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.commit
 import com.example.rickandmortyapp.databinding.ActivityMainBinding
-import java.lang.NullPointerException
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,9 +14,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportFragmentManager.beginTransaction()
-            .add(binding.containerFragment.id, GeneralFragment())
-            .commit()
+
+        if (supportFragmentManager.fragments.isEmpty()) {
+            supportFragmentManager.commit {
+                add(binding.containerFragment.id, GeneralFragment())
+            }
+        }
     }
 
     override fun onDestroy() {

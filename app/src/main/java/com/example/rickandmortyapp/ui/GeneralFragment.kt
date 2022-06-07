@@ -2,25 +2,23 @@ package com.example.rickandmortyapp.ui
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rickandmortyapp.R
 import com.example.rickandmortyapp.databinding.FragmentGeneralBinding
-import com.example.rickandmortyapp.data.models.ListCharacterModel
 import com.example.rickandmortyapp.ui.recycler.CharacterAdapter
 import com.example.rickandmortyapp.ui.recycler.DIffUtils
 import com.example.rickandmortyapp.ui.recycler.PageLoaderScrollListener
 import kotlinx.coroutines.flow.collect
-import java.lang.NullPointerException
-import javax.inject.Inject
 
-class GeneralFragment : Fragment(){
+class GeneralFragment : Fragment() {
 
     private var _binding: FragmentGeneralBinding? = null
     private val binding get() = _binding ?: throw NullPointerException("Binding is not initialized")
@@ -68,19 +66,25 @@ class GeneralFragment : Fragment(){
 
         lifecycleScope.launchWhenStarted {
             viewModel.adapterData.collect {
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, SecondFragment.newInstance(it))
-                    .addToBackStack(null)
-                    .commit()  }
+                parentFragmentManager.commit {
+                    replace(R.id.container_fragment, SecondFragment.newInstance(it))
+                    addToBackStack(null)
+                }
+            }
         }
 
-        viewModel.listCharacterModel.observe(viewLifecycleOwner){
-            val productDiffUtilCallback = DIffUtils(adapter.getData(), it)
-            val productDiffResult = DiffUtil.calculateDiff(productDiffUtilCallback)
+        viewModel.listCharacterModel.observe(viewLifecycleOwner, ::render)
+    }
 
-            adapter.setData(it)
-            productDiffResult.dispatchUpdatesTo(adapter)
+    private fun render(state: GeneralViewModel.ViewState) {
+        when(state) {
+            is GeneralViewModel.ViewState.CharacterModels -> {
+                val productDiffUtilCallback = DIffUtils(adapter.getData(), state.items)
+                val productDiffResult = DiffUtil.calculateDiff(productDiffUtilCallback)
 
+                adapter.setData(state.items)
+                productDiffResult.dispatchUpdatesTo(adapter)
+            }
         }
     }
 
@@ -93,7 +97,7 @@ class GeneralFragment : Fragment(){
 
         var instance: App = App()
 
-        fun getApp() : App {
+        fun getApp(): App {
             return instance
         }
 

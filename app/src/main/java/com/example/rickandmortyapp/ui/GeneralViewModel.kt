@@ -2,20 +2,25 @@ package com.example.rickandmortyapp.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.rickandmortyapp.data.models.ListCharacterModel
 import com.example.rickandmortyapp.domain.RemoteRepository
-import com.example.rickandmortyapp.data.RemoteRepositoryImpl
-import com.example.rickandmortyapp.data.RickMortyService
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import javax.inject.Inject
 
-class GeneralViewModel @Inject constructor(val repository: RemoteRepository) : ViewModel() {
+class GeneralViewModel @Inject constructor(
+    private val repository: RemoteRepository
+    ) : DisposableViewModel() {
 
-    private var _listCharacterModel = MutableLiveData<List<ListCharacterModel>>()
-    val listCharacterModel: LiveData<List<ListCharacterModel>> get() = _listCharacterModel
+    sealed class ViewState {
+        data class CharacterModels(
+            val items: List<ListCharacterModel>
+        ) : ViewState()
+    }
+
+    private var _listCharacterModel = MutableLiveData<ViewState>()
+    val listCharacterModel: LiveData<ViewState> get() = _listCharacterModel
 
     private var _adapterData =
         MutableSharedFlow<ListCharacterModel>(0, 1, BufferOverflow.DROP_OLDEST)
@@ -27,12 +32,15 @@ class GeneralViewModel @Inject constructor(val repository: RemoteRepository) : V
 
     fun loadData(page: Int = 1) {
         repository.request(page)
-            .subscribe({
-                val resultList = it.toMutableList().apply {
-                    _listCharacterModel.value?.let { it1 -> addAll(0, it1) }
-                }.toList()
-                _listCharacterModel.postValue(resultList)
-            }) {}
+            .subscribe({ items ->
+                _listCharacterModel.postValue(
+                    ViewState.CharacterModels(items)
+                )
+            }, {
+                //тут надо обработать ошибку или кинуть в лог
+            })
+            .untilDestroyView()
+
     }
 
     fun callbackData(callback: ListCharacterModel) {
