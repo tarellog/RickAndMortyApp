@@ -6,21 +6,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rickandmortyapp.R
-import com.example.rickandmortyapp.databinding.FragmentGeneralBinding
 import com.example.rickandmortyapp.data.models.ListCharacterModel
+import com.example.rickandmortyapp.databinding.FragmentGeneralBinding
 import com.example.rickandmortyapp.ui.recycler.CharacterAdapter
 import com.example.rickandmortyapp.ui.recycler.DIffUtils
 import com.example.rickandmortyapp.ui.recycler.PageLoaderScrollListener
 import kotlinx.coroutines.flow.collect
 import java.lang.NullPointerException
-import javax.inject.Inject
+
 
 class GeneralFragment : Fragment(){
 
@@ -48,7 +47,7 @@ class GeneralFragment : Fragment(){
     ): View {
         _binding = FragmentGeneralBinding.inflate(inflater, container, false)
 
-        adapter = CharacterAdapter(viewModel::callbackData)
+        adapter = CharacterAdapter(this::openSecondScreen)
         binding.recycler.adapter = adapter
 
         //toolbar
@@ -75,12 +74,10 @@ class GeneralFragment : Fragment(){
             adapter.setData(it)
             productDiffResult.dispatchUpdatesTo(adapter)
         }
+    }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.adapterData.collect {
-                findNavController().navigate(R.id.action_generalFragment_to_secondFragment, SecondFragment.dataForScreen(it))}
-        }
-
+    fun openSecondScreen(model: ListCharacterModel) {
+        findNavController().navigate(R.id.action_generalFragment_to_secondFragment, SecondFragment.dataForScreen(model))
     }
 
     override fun onDestroy() {
