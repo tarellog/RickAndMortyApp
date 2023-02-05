@@ -20,7 +20,7 @@ class SecondFragment : Fragment() {
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding ?: throw NullPointerException("Error is not initialized")
 
-    private val viewModel: SecondViewModel by viewModels {
+    private val viewModel: DescriptionCharacterViewModel by viewModels {
         GeneralFragment.getApp().appComponent.viewModelFactory()
     }
 

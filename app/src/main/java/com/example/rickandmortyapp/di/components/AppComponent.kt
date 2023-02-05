@@ -1,23 +1,24 @@
 package com.example.rickandmortyapp.di.components
 
-import android.content.Context
-import com.example.rickandmortyapp.di.modules.AppModule
+import com.example.rickandmortyapp.di.module.AppModule
+import com.example.rickandmortyapp.di.module.ViewModelModule
 import com.example.rickandmortyapp.domain.RemoteRepository
 import com.example.rickandmortyapp.ui.*
 import dagger.Component
 
 @Component(
     modules = [
-        AppModule::class
+        AppModule::class,
+        ViewModelModule::class
     ]
 )
 interface AppComponent {
 
     fun providesRemoteRepository(): RemoteRepository
 
-    fun myViewModel(): GeneralViewModel
+    fun myViewModel(): CharacterViewModel
 
-    fun mySecondViewModel(): SecondViewModel
+    fun mySecondViewModel(): DescriptionCharacterViewModel
 
     fun viewModelFactory(): FactoryViewModels
 

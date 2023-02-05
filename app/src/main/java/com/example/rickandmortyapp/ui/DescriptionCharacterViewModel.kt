@@ -10,7 +10,7 @@ import com.example.rickandmortyapp.domain.RemoteRepository
 import com.example.rickandmortyapp.domain.BaseModel
 import javax.inject.Inject
 
-class SecondViewModel @Inject constructor(
+class DescriptionCharacterViewModel(
     private val repository: RemoteRepository
 ) : ViewModel() {
 
