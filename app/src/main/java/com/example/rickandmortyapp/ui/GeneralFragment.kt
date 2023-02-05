@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +16,6 @@ import com.example.rickandmortyapp.databinding.FragmentGeneralBinding
 import com.example.rickandmortyapp.ui.recycler.CharacterAdapter
 import com.example.rickandmortyapp.ui.recycler.DIffUtils
 import com.example.rickandmortyapp.ui.recycler.PageLoaderScrollListener
-import kotlinx.coroutines.flow.collect
 import java.lang.NullPointerException
 
 
@@ -26,7 +24,7 @@ class GeneralFragment : Fragment(){
     private var _binding: FragmentGeneralBinding? = null
     private val binding get() = _binding ?: throw NullPointerException("Binding is not initialized")
 
-    private val viewModel: GeneralViewModel by viewModels {
+    private val viewModel: CharacterViewModel by viewModels {
         getApp().appComponent.viewModelFactory()
     }
 
