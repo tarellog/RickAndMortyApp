@@ -12,16 +12,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rickandmortyapp.R
 import com.example.rickandmortyapp.data.models.ListCharacterModel
-import com.example.rickandmortyapp.databinding.FragmentGeneralBinding
+import com.example.rickandmortyapp.databinding.FragmentCharacterBinding
 import com.example.rickandmortyapp.ui.recycler.CharacterAdapter
 import com.example.rickandmortyapp.ui.recycler.DIffUtils
 import com.example.rickandmortyapp.ui.recycler.PageLoaderScrollListener
 import java.lang.NullPointerException
 
+class CharacterFragment : Fragment(){
 
-class GeneralFragment : Fragment(){
-
-    private var _binding: FragmentGeneralBinding? = null
+    private var _binding: FragmentCharacterBinding? = null
     private val binding get() = _binding ?: throw NullPointerException("Binding is not initialized")
 
     private val viewModel: CharacterViewModel by viewModels {
@@ -43,7 +42,7 @@ class GeneralFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentGeneralBinding.inflate(inflater, container, false)
+        _binding = FragmentCharacterBinding.inflate(inflater, container, false)
 
         adapter = CharacterAdapter(this::openSecondScreen)
         binding.recycler.adapter = adapter
@@ -75,7 +74,7 @@ class GeneralFragment : Fragment(){
     }
 
     fun openSecondScreen(model: ListCharacterModel) {
-        findNavController().navigate(R.id.action_generalFragment_to_secondFragment, SecondFragment.dataForScreen(model))
+        findNavController().navigate(R.id.action_generalFragment_to_secondFragment, DescriptionCharacterFragment.dataForScreen(model))
     }
 
     override fun onDestroy() {

@@ -8,7 +8,6 @@ import com.example.rickandmortyapp.data.models.CharacterInfo
 import com.example.rickandmortyapp.data.models.ListCharacterModel
 import com.example.rickandmortyapp.domain.RemoteRepository
 import com.example.rickandmortyapp.domain.BaseModel
-import javax.inject.Inject
 
 class DescriptionCharacterViewModel(
     private val repository: RemoteRepository
@@ -18,7 +17,7 @@ class DescriptionCharacterViewModel(
     val mainInfoLiveData: LiveData<List<BaseModel>> get() = _mainInfoLiveData
 
     fun initByBundle(arguments: Bundle) {
-        val dataForScreen = arguments.getParcelable<ListCharacterModel>(GeneralFragment.DATA_KEY)
+        val dataForScreen = arguments.getParcelable<ListCharacterModel>(CharacterFragment.DATA_KEY)
         dataForScreen?.let { data ->
             repository.getEpisodes(data.getEpisodeList())
                 .subscribe({

@@ -22,8 +22,8 @@ interface AppComponent {
 
     fun viewModelFactory(): FactoryViewModels
 
-    fun inject(fragment: GeneralFragment)
+    fun inject(fragment: CharacterFragment)
 
-    fun inject(secondFragment: SecondFragment)
+    fun inject(secondFragment: DescriptionCharacterFragment)
 
 }

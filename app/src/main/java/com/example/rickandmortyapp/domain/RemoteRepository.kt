@@ -6,6 +6,6 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 
 interface RemoteRepository {
-    fun request(page: Int): Observable<List<ListCharacterModel>>
+    fun getCharacter(page: Int): Observable<List<ListCharacterModel>>
     fun getEpisodes(episodes: List<Int>): Single<List<EpisodeModel>>
 }

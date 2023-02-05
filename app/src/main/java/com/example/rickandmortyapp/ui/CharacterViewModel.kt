@@ -18,7 +18,7 @@ class CharacterViewModel(
     }
 
     fun loadData(page: Int = 1) {
-        repository.request(page)
+        repository.getCharacter(page)
             .subscribe({
                 val resultList = it.toMutableList().apply {
                     _listCharacterModel.value?.let { it1 -> addAll(0, it1) }

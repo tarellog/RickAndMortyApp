@@ -4,7 +4,7 @@ import android.app.Application
 import com.example.rickandmortyapp.di.components.AppComponent
 import com.example.rickandmortyapp.di.components.DaggerAppComponent
 import com.example.rickandmortyapp.di.module.AppModule
-import com.example.rickandmortyapp.ui.GeneralFragment.Companion.instance
+import com.example.rickandmortyapp.ui.CharacterFragment.Companion.instance
 
 class App : Application() {
     lateinit var appComponent: AppComponent

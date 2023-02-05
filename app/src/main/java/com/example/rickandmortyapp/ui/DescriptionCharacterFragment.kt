@@ -9,33 +9,29 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.rickandmortyapp.R
-import com.example.rickandmortyapp.ui.GeneralFragment.Companion.DATA_KEY
-import com.example.rickandmortyapp.databinding.FragmentSecondBinding
+import com.example.rickandmortyapp.ui.CharacterFragment.Companion.DATA_KEY
 import com.example.rickandmortyapp.data.models.ListCharacterModel
+import com.example.rickandmortyapp.databinding.FragmentDescriptionCharacterBinding
 import com.example.rickandmortyapp.ui.recycler.EpisodesAdapter
 import java.lang.NullPointerException
 
-class SecondFragment : Fragment() {
+class DescriptionCharacterFragment : Fragment() {
 
-    private var _binding: FragmentSecondBinding? = null
+    private var _binding: FragmentDescriptionCharacterBinding? = null
     private val binding get() = _binding ?: throw NullPointerException("Error is not initialized")
 
     private val viewModel: DescriptionCharacterViewModel by viewModels {
-        GeneralFragment.getApp().appComponent.viewModelFactory()
+        CharacterFragment.getApp().appComponent.viewModelFactory()
     }
 
     private lateinit var adapter: EpisodesAdapter
-
-    companion object {
-        fun dataForScreen(model: ListCharacterModel) = bundleOf(DATA_KEY to model)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding = FragmentDescriptionCharacterBinding.inflate(inflater, container, false)
 
         adapter = EpisodesAdapter()
         binding.episodeRecycler.adapter = adapter
@@ -66,4 +62,9 @@ class SecondFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
+
+    companion object {
+        fun dataForScreen(model: ListCharacterModel) = bundleOf(DATA_KEY to model)
+    }
+
 }

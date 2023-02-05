@@ -9,9 +9,8 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RickMortyService {
-
     @GET("character")
-    fun getApi(@Query("page") page: Int = 1): Observable<CharacterModel>
+    fun getCharacter(@Query("page") page: Int = 1): Observable<CharacterModel>
 
     @GET("episode/{episodes}")
     fun getEpisodes(@Path("episodes") episodes: List<Int>): Single<List<EpisodeModel>>

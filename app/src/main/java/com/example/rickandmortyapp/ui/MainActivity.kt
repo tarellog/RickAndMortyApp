@@ -21,5 +21,4 @@ class MainActivity : AppCompatActivity() {
         _binding = null
     }
 
-
 }
