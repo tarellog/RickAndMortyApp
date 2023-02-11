@@ -1,7 +1,5 @@
 package com.example.rickandmortyapp.di.modules
 
-import android.content.Context
-import androidx.annotation.NonNull
 import com.example.rickandmortyapp.data.RemoteRepositoryImpl
 import com.example.rickandmortyapp.data.RickMortyService
 import com.example.rickandmortyapp.domain.RemoteRepository
