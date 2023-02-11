@@ -1,7 +1,7 @@
 package com.example.rickandmortyapp.di.components
 
-import com.example.rickandmortyapp.di.module.AppModule
 import com.example.rickandmortyapp.di.module.ViewModelModule
+import com.example.rickandmortyapp.di.modules.AppModule
 import com.example.rickandmortyapp.domain.RemoteRepository
 import com.example.rickandmortyapp.ui.*
 import dagger.Component
@@ -15,10 +15,6 @@ import dagger.Component
 interface AppComponent {
 
     fun providesRemoteRepository(): RemoteRepository
-
-    fun myViewModel(): CharacterViewModel
-
-    fun mySecondViewModel(): DescriptionCharacterViewModel
 
     fun viewModelFactory(): FactoryViewModels
 
