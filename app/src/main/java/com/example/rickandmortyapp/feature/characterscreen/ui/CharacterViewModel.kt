@@ -1,12 +1,13 @@
-package com.example.rickandmortyapp.ui
+package com.example.rickandmortyapp.feature.characterscreen.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.rickandmortyapp.data.models.ListCharacterModel
 import com.example.rickandmortyapp.domain.RemoteRepository
+import javax.inject.Inject
 
-class CharacterViewModel(
+class CharacterViewModel @Inject constructor(
     private val repository: RemoteRepository
 ) : ViewModel() {
 

@@ -10,7 +10,7 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
-class AppModule() {
+class AppModule {
 
     @Provides
     fun providesRetrofit(): Retrofit = Retrofit.Builder()

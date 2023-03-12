@@ -1,4 +1,4 @@
-package com.example.rickandmortyapp.ui.recycler
+package com.example.rickandmortyapp.feature.characterscreen.ui.recycler
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
