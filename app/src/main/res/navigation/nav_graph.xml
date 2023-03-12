@@ -6,16 +6,16 @@
     app:startDestination="@id/generalFragment">
     <fragment
         android:id="@+id/generalFragment"
-        android:name="com.example.rickandmortyapp.ui.GeneralFragment"
+        android:name="com.example.rickandmortyapp.feature.characterscreen.ui.CharacterFragment"
         android:label="fragment_general"
-        tools:layout="@layout/fragment_general" >
+        tools:layout="@layout/fragment_character" >
         <action
             android:id="@+id/action_generalFragment_to_secondFragment"
             app:destination="@id/secondFragment" />
     </fragment>
     <fragment
         android:id="@+id/secondFragment"
-        android:name="com.example.rickandmortyapp.ui.SecondFragment"
+        android:name="com.example.rickandmortyapp.feature.episodescreen.ui.EpisodeFragment"
         android:label="fragment_second"
-        tools:layout="@layout/fragment_second" />
+        tools:layout="@layout/fragment_episode" />
 </navigation>

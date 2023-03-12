@@ -1,4 +1,4 @@
-package com.example.rickandmortyapp.ui
+package com.example.rickandmortyapp.feature.episodescreen.ui
 
 import android.os.Bundle
 import androidx.lifecycle.LiveData
@@ -8,9 +8,10 @@ import com.example.rickandmortyapp.data.models.CharacterInfo
 import com.example.rickandmortyapp.data.models.ListCharacterModel
 import com.example.rickandmortyapp.domain.RemoteRepository
 import com.example.rickandmortyapp.domain.BaseModel
+import com.example.rickandmortyapp.feature.characterscreen.ui.CharacterFragment
 import javax.inject.Inject
 
-class DescriptionCharacterViewModel(
+class EpisodeViewModel @Inject constructor(
     private val repository: RemoteRepository
 ) : ViewModel() {
 
@@ -18,7 +19,7 @@ class DescriptionCharacterViewModel(
     val mainInfoLiveData: LiveData<List<BaseModel>> get() = _mainInfoLiveData
 
     fun initByBundle(arguments: Bundle) {
-        val dataForScreen = arguments.getParcelable<ListCharacterModel>(GeneralFragment.DATA_KEY)
+        val dataForScreen = arguments.getParcelable<ListCharacterModel>(CharacterFragment.DATA_KEY)
         dataForScreen?.let { data ->
             repository.getEpisodes(data.getEpisodeList())
                 .subscribe({

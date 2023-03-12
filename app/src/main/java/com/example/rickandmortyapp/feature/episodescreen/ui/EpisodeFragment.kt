@@ -1,5 +1,6 @@
-package com.example.rickandmortyapp.ui
+package com.example.rickandmortyapp.feature.episodescreen.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,25 +10,31 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.rickandmortyapp.R
-import com.example.rickandmortyapp.ui.GeneralFragment.Companion.DATA_KEY
-import com.example.rickandmortyapp.databinding.FragmentSecondBinding
+import com.example.rickandmortyapp.application.App
+import com.example.rickandmortyapp.core.ui.viewmodel.ViewModelFactory
+import com.example.rickandmortyapp.feature.characterscreen.ui.CharacterFragment.Companion.DATA_KEY
 import com.example.rickandmortyapp.data.models.ListCharacterModel
-import com.example.rickandmortyapp.ui.recycler.EpisodesAdapter
+import com.example.rickandmortyapp.databinding.FragmentEpisodeBinding
+import com.example.rickandmortyapp.feature.episodescreen.ui.recycler.EpisodesAdapter
 import java.lang.NullPointerException
+import javax.inject.Inject
 
-class SecondFragment : Fragment() {
+class EpisodeFragment : Fragment() {
 
-    private var _binding: FragmentSecondBinding? = null
+    private var _binding: FragmentEpisodeBinding? = null
     private val binding get() = _binding ?: throw NullPointerException("Error is not initialized")
 
-    private val viewModel: DescriptionCharacterViewModel by viewModels {
-        GeneralFragment.getApp().appComponent.viewModelFactory()
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    private val viewModel: EpisodeViewModel by viewModels {
+        viewModelFactory
     }
 
     private lateinit var adapter: EpisodesAdapter
 
-    companion object {
-        fun dataForScreen(model: ListCharacterModel) = bundleOf(DATA_KEY to model)
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (context.applicationContext as App).appComponent.secondInject(this)
     }
 
     override fun onCreateView(
@@ -35,7 +42,7 @@ class SecondFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding = FragmentEpisodeBinding.inflate(inflater, container, false)
 
         adapter = EpisodesAdapter()
         binding.episodeRecycler.adapter = adapter
@@ -66,4 +73,9 @@ class SecondFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
+
+    companion object {
+        fun dataForScreen(model: ListCharacterModel) = bundleOf(DATA_KEY to model)
+    }
+
 }

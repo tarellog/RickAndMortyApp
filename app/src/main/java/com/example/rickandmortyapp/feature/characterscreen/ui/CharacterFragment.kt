@@ -1,4 +1,4 @@
-package com.example.rickandmortyapp.ui
+package com.example.rickandmortyapp.feature.characterscreen.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -11,21 +11,26 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rickandmortyapp.R
+import com.example.rickandmortyapp.core.ui.viewmodel.ViewModelFactory
 import com.example.rickandmortyapp.data.models.ListCharacterModel
-import com.example.rickandmortyapp.databinding.FragmentGeneralBinding
-import com.example.rickandmortyapp.ui.recycler.CharacterAdapter
-import com.example.rickandmortyapp.ui.recycler.DIffUtils
-import com.example.rickandmortyapp.ui.recycler.PageLoaderScrollListener
+import com.example.rickandmortyapp.application.App
+import com.example.rickandmortyapp.databinding.FragmentCharacterBinding
+import com.example.rickandmortyapp.feature.episodescreen.ui.EpisodeFragment
+import com.example.rickandmortyapp.feature.characterscreen.ui.recycler.CharacterAdapter
+import com.example.rickandmortyapp.feature.characterscreen.ui.recycler.DIffUtils
+import com.example.rickandmortyapp.feature.characterscreen.ui.recycler.PageLoaderScrollListener
 import java.lang.NullPointerException
+import javax.inject.Inject
 
+class CharacterFragment : Fragment() {
 
-class GeneralFragment : Fragment(){
-
-    private var _binding: FragmentGeneralBinding? = null
+    private var _binding: FragmentCharacterBinding? = null
     private val binding get() = _binding ?: throw NullPointerException("Binding is not initialized")
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
     private val viewModel: CharacterViewModel by viewModels {
-        getApp().appComponent.viewModelFactory()
+        viewModelFactory
     }
 
     private lateinit var adapter: CharacterAdapter
@@ -35,7 +40,7 @@ class GeneralFragment : Fragment(){
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        getApp().appComponent.inject(this)
+        (context.applicationContext as App).appComponent.inject(this)
     }
 
     override fun onCreateView(
@@ -43,7 +48,7 @@ class GeneralFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentGeneralBinding.inflate(inflater, container, false)
+        _binding = FragmentCharacterBinding.inflate(inflater, container, false)
 
         adapter = CharacterAdapter(this::openSecondScreen)
         binding.recycler.adapter = adapter
@@ -75,7 +80,9 @@ class GeneralFragment : Fragment(){
     }
 
     fun openSecondScreen(model: ListCharacterModel) {
-        findNavController().navigate(R.id.action_generalFragment_to_secondFragment, SecondFragment.dataForScreen(model))
+        findNavController().navigate(R.id.action_generalFragment_to_secondFragment,
+            EpisodeFragment.dataForScreen(model)
+        )
     }
 
     override fun onDestroy() {
@@ -84,13 +91,6 @@ class GeneralFragment : Fragment(){
     }
 
     companion object {
-
-        var instance: App = App()
-
-        fun getApp() : App {
-            return instance
-        }
-
         const val DATA_KEY = "key"
     }
 
