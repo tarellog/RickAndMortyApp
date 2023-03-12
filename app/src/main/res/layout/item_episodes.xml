@@ -7,7 +7,7 @@
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
     android:layout_gravity="center_horizontal"
-    android:background="#1F6A5A">
+    android:background="@drawable/round_corner_header">
 
     <TextView
         android:id="@+id/id"
