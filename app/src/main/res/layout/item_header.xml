@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
-    android:layout_marginHorizontal="20dp"
+    android:layout_gravity="center_horizontal"
     android:background="#1F6A5A">
 
     <ImageView
