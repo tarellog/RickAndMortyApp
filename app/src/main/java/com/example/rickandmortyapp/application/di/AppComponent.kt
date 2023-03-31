@@ -18,6 +18,6 @@ interface AppComponent {
 
     fun inject(fragment: CharacterFragment)
 
-    fun secondInject(secondFragment: EpisodeFragment)
+    fun inject(secondFragment: EpisodeFragment)
 
 }
