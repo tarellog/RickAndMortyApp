@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rickandmortyapp.R
 import com.example.rickandmortyapp.core.ui.viewmodel.ViewModelFactory
@@ -17,7 +16,6 @@ import com.example.rickandmortyapp.application.App
 import com.example.rickandmortyapp.databinding.FragmentCharacterBinding
 import com.example.rickandmortyapp.feature.episodescreen.ui.EpisodeFragment
 import com.example.rickandmortyapp.feature.characterscreen.ui.recycler.CharacterAdapter
-import com.example.rickandmortyapp.feature.characterscreen.ui.recycler.DIffUtils
 import com.example.rickandmortyapp.feature.characterscreen.ui.recycler.PageLoaderScrollListener
 import java.lang.NullPointerException
 import javax.inject.Inject
@@ -71,11 +69,7 @@ class CharacterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.listCharacterModel.observe(viewLifecycleOwner){
-            val productDiffUtilCallback = DIffUtils(adapter.getData(), it)
-            val productDiffResult = DiffUtil.calculateDiff(productDiffUtilCallback)
-
-            adapter.setData(it)
-            productDiffResult.dispatchUpdatesTo(adapter)
+            adapter.submitList(it)
         }
     }
 

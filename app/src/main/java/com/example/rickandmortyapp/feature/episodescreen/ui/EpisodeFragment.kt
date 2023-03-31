@@ -34,7 +34,7 @@ class EpisodeFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (context.applicationContext as App).appComponent.secondInject(this)
+        (context.applicationContext as App).appComponent.inject(this)
     }
 
     override fun onCreateView(
@@ -64,8 +64,7 @@ class EpisodeFragment : Fragment() {
         super.onStart()
 
         viewModel.mainInfoLiveData.observe(viewLifecycleOwner) {
-            adapter.setData(it)
-            adapter.notifyDataSetChanged()
+            adapter.submitList(it)
         }
     }
 

@@ -20,12 +20,14 @@ class CharacterViewModel @Inject constructor(
 
     fun loadData(page: Int = 1) {
         repository.request(page)
-            .subscribe({
+            .doOnNext {
                 val resultList = it.toMutableList().apply {
                     _listCharacterModel.value?.let { it1 -> addAll(0, it1) }
                 }.toList()
                 _listCharacterModel.postValue(resultList)
-            }) {}
+            }
+            .doOnError { it.message }
+            .subscribe()
     }
 
 }
