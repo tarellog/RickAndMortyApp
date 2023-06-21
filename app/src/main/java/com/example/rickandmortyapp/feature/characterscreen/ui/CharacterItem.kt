@@ -20,13 +20,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.rickandmortyapp.R
+import com.example.rickandmortyapp.data.models.ListCharacterModel
+import com.example.rickandmortyapp.feature.characterscreen.ui.SampleData.listData
 
 @Composable
 fun CharacterItem(
-    image: String,
-    name: String,
-    species: String,
-    gender: String,
+    characterModel: ListCharacterModel,
+    onCharacterClicked: (ListCharacterModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -37,10 +37,10 @@ fun CharacterItem(
             .clip(RoundedCornerShape(20.dp))
             .fillMaxSize()
             .background(colorResource(R.color.gray))
-            .clickable {  }
+            .clickable { onCharacterClicked(characterModel) }
     ) {
         Image(
-            painter = rememberAsyncImagePainter(image),
+            painter = rememberAsyncImagePainter(characterModel.image),
             contentDescription = null,
             modifier = modifier
                 .padding(20.dp)
@@ -48,19 +48,19 @@ fun CharacterItem(
                 .clip(RoundedCornerShape(20.dp))
         )
         Text(
-            text = name,
+            text = characterModel.name,
             textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = modifier.padding(bottom = 20.dp)
         )
         Text(
-            text = species,
+            text = characterModel.species,
             textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = modifier.padding(bottom = 20.dp)
         )
         Text(
-            text = gender,
+            text = characterModel.gender,
             textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = modifier.padding(bottom = 20.dp)
@@ -72,9 +72,7 @@ fun CharacterItem(
 @Composable
 fun CharacterItemPreview() {
     CharacterItem(
-        image = "preview",
-        name = "title",
-        species = "subtitle",
-        gender = "description"
+        characterModel = listData[3],
+        onCharacterClicked = { listData }
     )
 }

@@ -77,7 +77,10 @@ class CharacterFragment : Fragment() {
 
         composeView.setContent {
             val listCharacter by viewModel.listCharacterModel.collectAsState()
-            CharacterScreen(listCharacter)
+            CharacterScreen(
+                list = listCharacter,
+                onCharacterClicked = (::openSecondScreen)
+            )
         }
 
     }

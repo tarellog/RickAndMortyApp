@@ -15,6 +15,7 @@ import com.example.rickandmortyapp.feature.characterscreen.ui.SampleData.listDat
 @Composable
 fun CharacterList(
     listItem: List<ListCharacterModel>,
+    onCharacterClicked: (ListCharacterModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
     MainTitle(
@@ -27,10 +28,8 @@ fun CharacterList(
         ) {
             items(listItem) {item ->
                 CharacterItem(
-                    image = item.image,
-                    name = item.name,
-                    species = item.species,
-                    gender = item.gender
+                    characterModel = item,
+                    onCharacterClicked = onCharacterClicked
                 )
             }
         }
@@ -38,25 +37,25 @@ fun CharacterList(
 }
 
 
-@Preview(showBackground = true)
-@Composable
-fun CharacterListPreview() {
-    MainTitle(
-        title = "Все персонажи",
-    ) {
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            contentPadding = PaddingValues(10.dp),
-            modifier = Modifier
-        ) {
-            items(listData) {item ->
-                CharacterItem(
-                    image = item.img,
-                    name = item.title,
-                    species = item.description,
-                    gender = item.title
-                )
-            }
-        }
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun CharacterListPreview() {
+//    MainTitle(
+//        title = "Все персонажи",
+//    ) {
+//        LazyVerticalGrid(
+//            columns = GridCells.Fixed(2),
+//            contentPadding = PaddingValues(10.dp),
+//            modifier = Modifier
+//        ) {
+//            items(listData) {item ->
+//                CharacterItem(
+//                    image = item.img,
+//                    name = item.title,
+//                    species = item.description,
+//                    gender = item.title
+//                )
+//            }
+//        }
+//    }
+//}

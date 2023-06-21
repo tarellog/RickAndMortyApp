@@ -10,11 +10,16 @@ import com.example.rickandmortyapp.data.models.ListCharacterModel
 @Composable
 fun CharacterScreen(
     list: List<ListCharacterModel>,
+    onCharacterClicked: (ListCharacterModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
         modifier.fillMaxSize()
     ) {
-        CharacterList(listItem = list, modifier = modifier.padding(it))
+        CharacterList(
+            listItem = list,
+            onCharacterClicked = onCharacterClicked,
+            modifier = modifier.padding(it)
+        )
     }
 }
