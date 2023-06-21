@@ -68,11 +68,11 @@ fun CharacterItem(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0x58646D)
+@Preview(showBackground = false, )
 @Composable
 fun CharacterItemPreview() {
     CharacterItem(
-        characterModel = listData[3],
+        characterModel = listData[2],
         onCharacterClicked = { listData }
     )
 }

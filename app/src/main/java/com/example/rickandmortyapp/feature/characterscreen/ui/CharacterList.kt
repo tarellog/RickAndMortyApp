@@ -36,26 +36,8 @@ fun CharacterList(
     }
 }
 
-
-//@Preview(showBackground = true)
-//@Composable
-//fun CharacterListPreview() {
-//    MainTitle(
-//        title = "Все персонажи",
-//    ) {
-//        LazyVerticalGrid(
-//            columns = GridCells.Fixed(2),
-//            contentPadding = PaddingValues(10.dp),
-//            modifier = Modifier
-//        ) {
-//            items(listData) {item ->
-//                CharacterItem(
-//                    image = item.img,
-//                    name = item.title,
-//                    species = item.description,
-//                    gender = item.title
-//                )
-//            }
-//        }
-//    }
-//}
+@Preview(showBackground = true)
+@Composable
+fun CharacterListPreview() {
+    CharacterList(listItem = listData, onCharacterClicked = { listData})
+}
