@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,9 +24,10 @@ import java.lang.NullPointerException
 import javax.inject.Inject
 
 class CharacterFragment : Fragment() {
-
-    private var _binding: FragmentCharacterBinding? = null
-    private val binding get() = _binding ?: throw NullPointerException("Binding is not initialized")
+//
+//    private var _binding: FragmentCharacterBinding? = null
+//    private val binding get() = _binding ?: throw NullPointerException("Binding is not initialized")
+    private lateinit var composeView: ComposeView
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -46,42 +50,42 @@ class CharacterFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCharacterBinding.inflate(inflater, container, false)
+//        _binding = FragmentCharacterBinding.inflate(inflater, container, false)
 
         adapter = CharacterAdapter(this::openSecondScreen)
-        binding.recycler.adapter = adapter
+//        binding.recycler.adapter = adapter
 
         //toolbar
-        binding.customToolbar.backButton.visibility = View.GONE
-        binding.customToolbar.textTitle.text = getString(R.string.character)
+//        binding.customToolbar.backButton.visibility = View.GONE
+//        binding.customToolbar.textTitle.text = getString(R.string.character)
 
         //pagination
-        paginScrollListener = PageLoaderScrollListener(
-            binding.recycler.layoutManager as LinearLayoutManager,
-            viewModel::loadData
-        )
-        binding.recycler.addOnScrollListener(paginScrollListener)
+//        paginScrollListener = PageLoaderScrollListener(
+//            binding.recycler.layoutManager as LinearLayoutManager,
+//            viewModel::loadData
+//        )
+//        binding.recycler.addOnScrollListener(paginScrollListener)
 
-        return binding.root
+//        return binding.root
+        return ComposeView(requireContext()).also {
+            composeView = it
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.listCharacterModel.observe(viewLifecycleOwner){
-            adapter.submitList(it)
+        composeView.setContent {
+            val listCharacter by viewModel.listCharacterModel.collectAsState()
+            CharacterScreen(listCharacter)
         }
+
     }
 
     fun openSecondScreen(model: ListCharacterModel) {
         findNavController().navigate(R.id.action_generalFragment_to_secondFragment,
             EpisodeFragment.dataForScreen(model)
         )
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 
     companion object {
