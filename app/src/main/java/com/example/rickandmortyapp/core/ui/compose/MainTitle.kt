@@ -1,5 +1,6 @@
 package com.example.rickandmortyapp.core.ui.compose
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,7 +16,8 @@ import androidx.compose.ui.unit.dp
 fun MainTitle(
     modifier: Modifier = Modifier,
     title: String,
-    content: @Composable () -> Unit
+    onTitleClicked: () -> Unit,
+    content: @Composable () -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -26,6 +28,7 @@ fun MainTitle(
                 .fillMaxWidth()
                 .height(40.dp)
                 .padding(start = 20.dp, top = 10.dp)
+                .clickable { onTitleClicked() }
         ) {
             Text(text = title, maxLines = 1)
         }

@@ -19,7 +19,8 @@ fun CharacterScreen(
         CharacterList(
             listItem = list,
             onCharacterClicked = onCharacterClicked,
-            modifier = modifier.padding(it)
+            modifier = modifier.padding(it),
+            onTitleClicked = {}
         )
     }
 }

@@ -11,16 +11,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rickandmortyapp.R
 import com.example.rickandmortyapp.core.ui.viewmodel.ViewModelFactory
 import com.example.rickandmortyapp.data.models.ListCharacterModel
 import com.example.rickandmortyapp.application.App
-import com.example.rickandmortyapp.databinding.FragmentCharacterBinding
 import com.example.rickandmortyapp.feature.episodescreen.ui.EpisodeFragment
 import com.example.rickandmortyapp.feature.characterscreen.ui.recycler.CharacterAdapter
 import com.example.rickandmortyapp.feature.characterscreen.ui.recycler.PageLoaderScrollListener
-import java.lang.NullPointerException
 import javax.inject.Inject
 
 class CharacterFragment : Fragment() {
@@ -52,7 +49,7 @@ class CharacterFragment : Fragment() {
     ): View {
 //        _binding = FragmentCharacterBinding.inflate(inflater, container, false)
 
-        adapter = CharacterAdapter(this::openSecondScreen)
+//        adapter = CharacterAdapter(this::openSecondScreen)
 //        binding.recycler.adapter = adapter
 
         //toolbar
