@@ -1,52 +1,49 @@
 package com.example.rickandmortyapp.feature.characterscreen.ui
 
-import com.example.rickandmortyapp.data.models.ListCharacterModel
 import com.example.rickandmortyapp.data.models.LocationCharacterModel
-import com.example.rickandmortyapp.data.models.OriginModel
+import com.example.rickandmortyapp.domain.models.ListCharacter
 
 object SampleData {
     val listData = listOf(
-        ListCharacterModel(
-            id = 0,
-            "werttttt",
+        ListCharacter(
+            20,
             "Lexi",
             "Test...Test...Test...",
             "dss",
             "dsdsd",
-            OriginModel("dsd","dsdsds"),
             LocationCharacterModel("dssdsds", "dsdsdsd"),
             "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
             listOf("dfdfd"),
-            "dfdfdfd",
-            "dsfdsfs"
         ),
-        ListCharacterModel(
-            id = 1,
-            "werttttt",
+        ListCharacter(
+            20,
             "Lexi",
             "Test...Test...Test...",
             "dss",
             "dsdsd",
-            OriginModel("dsd","dsdsds"),
             LocationCharacterModel("dssdsds", "dsdsdsd"),
             "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
             listOf("dfdfd"),
-            "dfdfdfd",
-            "dsfdsfs"
         ),
-        ListCharacterModel(
-            id = 2,
-            "werttttt",
+        ListCharacter(
+            20,
             "Lexi",
             "Test...Test...Test...",
             "dss",
             "dsdsd",
-            OriginModel("dsd","dsdsds"),
             LocationCharacterModel("dssdsds", "dsdsdsd"),
             "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
             listOf("dfdfd"),
-            "dfdfdfd",
-            "dsfdsfs"
+        ),
+        ListCharacter(
+            20,
+            "Lexi",
+            "Test...Test...Test...",
+            "dss",
+            "dsdsd",
+            LocationCharacterModel("dssdsds", "dsdsdsd"),
+            "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+            listOf("dfdfd"),
         ),
     )
 }

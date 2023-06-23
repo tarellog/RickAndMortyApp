@@ -20,13 +20,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.rickandmortyapp.R
-import com.example.rickandmortyapp.data.models.ListCharacterModel
+import com.example.rickandmortyapp.domain.models.ListCharacter
 import com.example.rickandmortyapp.feature.characterscreen.ui.SampleData.listData
 
 @Composable
 fun CharacterItem(
-    characterModel: ListCharacterModel,
-    onCharacterClicked: (ListCharacterModel) -> Unit,
+    characterModel: ListCharacter,
+    onCharacterClicked: (ListCharacter) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(

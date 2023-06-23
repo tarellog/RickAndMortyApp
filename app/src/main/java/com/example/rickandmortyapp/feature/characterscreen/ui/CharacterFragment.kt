@@ -15,6 +15,7 @@ import com.example.rickandmortyapp.R
 import com.example.rickandmortyapp.core.ui.viewmodel.ViewModelFactory
 import com.example.rickandmortyapp.data.models.ListCharacterModel
 import com.example.rickandmortyapp.application.App
+import com.example.rickandmortyapp.domain.models.ListCharacter
 import com.example.rickandmortyapp.feature.episodescreen.ui.EpisodeFragment
 import com.example.rickandmortyapp.feature.characterscreen.ui.recycler.CharacterAdapter
 import com.example.rickandmortyapp.feature.characterscreen.ui.recycler.PageLoaderScrollListener
@@ -82,7 +83,7 @@ class CharacterFragment : Fragment() {
 
     }
 
-    fun openSecondScreen(model: ListCharacterModel) {
+    fun openSecondScreen(model: ListCharacter) {
         findNavController().navigate(R.id.action_generalFragment_to_secondFragment,
             EpisodeFragment.dataForScreen(model)
         )

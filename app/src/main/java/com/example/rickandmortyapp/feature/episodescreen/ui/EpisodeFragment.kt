@@ -13,8 +13,8 @@ import com.example.rickandmortyapp.R
 import com.example.rickandmortyapp.application.App
 import com.example.rickandmortyapp.core.ui.viewmodel.ViewModelFactory
 import com.example.rickandmortyapp.feature.characterscreen.ui.CharacterFragment.Companion.DATA_KEY
-import com.example.rickandmortyapp.data.models.ListCharacterModel
 import com.example.rickandmortyapp.databinding.FragmentEpisodeBinding
+import com.example.rickandmortyapp.domain.models.ListCharacter
 import com.example.rickandmortyapp.feature.episodescreen.ui.recycler.EpisodesAdapter
 import java.lang.NullPointerException
 import javax.inject.Inject
@@ -74,7 +74,7 @@ class EpisodeFragment : Fragment() {
     }
 
     companion object {
-        fun dataForScreen(model: ListCharacterModel) = bundleOf(DATA_KEY to model)
+        fun dataForScreen(model: ListCharacter) = bundleOf(DATA_KEY to model)
     }
 
 }

@@ -5,12 +5,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.rickandmortyapp.data.models.ListCharacterModel
+import com.example.rickandmortyapp.domain.models.ListCharacter
 
 @Composable
 fun CharacterScreen(
-    list: List<ListCharacterModel>,
-    onCharacterClicked: (ListCharacterModel) -> Unit,
+    list: List<ListCharacter>,
+    onCharacterClicked: (ListCharacter) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
