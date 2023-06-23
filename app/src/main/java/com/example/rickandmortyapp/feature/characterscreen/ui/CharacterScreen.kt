@@ -5,11 +5,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.paging.PagingData
 import com.example.rickandmortyapp.domain.models.ListCharacter
+import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun CharacterScreen(
-    list: List<ListCharacter>,
+    list: Flow<PagingData<ListCharacter>>,
     onCharacterClicked: (ListCharacter) -> Unit,
     modifier: Modifier = Modifier
 ) {

@@ -1,7 +1,9 @@
 package com.example.rickandmortyapp.feature.characterscreen.ui
 
+import androidx.paging.PagingData
 import com.example.rickandmortyapp.data.models.LocationCharacterModel
 import com.example.rickandmortyapp.domain.models.ListCharacter
+import kotlinx.coroutines.flow.MutableStateFlow
 
 object SampleData {
     val listData = listOf(
@@ -46,4 +48,6 @@ object SampleData {
             listOf("dfdfd"),
         ),
     )
+    private val fakeData = PagingData.from(listData)
+    val flowFakeData = MutableStateFlow(fakeData)
 }

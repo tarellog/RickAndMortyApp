@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.rickandmortyapp.R
 import com.example.rickandmortyapp.core.ui.viewmodel.ViewModelFactory
 import com.example.rickandmortyapp.data.models.ListCharacterModel
@@ -74,7 +75,7 @@ class CharacterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         composeView.setContent {
-            val listCharacter by viewModel.listCharacterModel.collectAsState()
+            val listCharacter = viewModel.characterPages
             CharacterScreen(
                 list = listCharacter,
                 onCharacterClicked = (::openSecondScreen)
