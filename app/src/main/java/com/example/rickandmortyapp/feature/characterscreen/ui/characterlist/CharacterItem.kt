@@ -1,4 +1,4 @@
-package com.example.rickandmortyapp.feature.characterscreen.ui
+package com.example.rickandmortyapp.feature.characterscreen.ui.characterlist
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.rickandmortyapp.R
 import com.example.rickandmortyapp.domain.models.ListCharacter
-import com.example.rickandmortyapp.feature.characterscreen.ui.SampleData.listData
+import com.example.rickandmortyapp.core.SampleData.listData
 
 @Composable
 fun CharacterItem(

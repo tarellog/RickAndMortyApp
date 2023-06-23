@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.PagingData
 import com.example.rickandmortyapp.domain.models.ListCharacter
+import com.example.rickandmortyapp.feature.characterscreen.ui.characterlist.CharacterList
 import kotlinx.coroutines.flow.Flow
 
 @Composable

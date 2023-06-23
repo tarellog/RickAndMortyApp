@@ -1,4 +1,4 @@
-package com.example.rickandmortyapp.feature.characterscreen.ui
+package com.example.rickandmortyapp.core
 
 import androidx.paging.PagingData
 import com.example.rickandmortyapp.data.models.LocationCharacterModel
