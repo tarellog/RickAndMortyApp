@@ -2,7 +2,7 @@ package com.example.rickandmortyapp.di.modules
 
 import com.example.rickandmortyapp.data.RemoteRepositoryImpl
 import com.example.rickandmortyapp.data.RickMortyService
-import com.example.rickandmortyapp.domain.RemoteRepository
+import com.example.rickandmortyapp.data.RemoteRepository
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -10,7 +10,7 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
-class AppModule {
+class NetworkModule {
 
     @Provides
     fun providesRetrofit(): Retrofit = Retrofit.Builder()

@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.rickandmortyapp.data.models.CharacterInfo
-import com.example.rickandmortyapp.domain.RemoteRepository
+import com.example.rickandmortyapp.data.RemoteRepository
 import com.example.rickandmortyapp.domain.BaseModel
 import com.example.rickandmortyapp.domain.models.ListCharacter
 import com.example.rickandmortyapp.feature.characterscreen.ui.CharacterFragment

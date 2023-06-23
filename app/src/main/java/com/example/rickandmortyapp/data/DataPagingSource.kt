@@ -2,11 +2,11 @@ package com.example.rickandmortyapp.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.rickandmortyapp.domain.RemoteRepository
 import com.example.rickandmortyapp.domain.models.ListCharacter
+import com.example.rickandmortyapp.domain.usecase.DataCharacterUseCase
 
 class DataPagingSource(
-    private val remoteRepository: RemoteRepository
+    private val dataCharacterUseCase: DataCharacterUseCase
 ) : PagingSource<Int, ListCharacter>() {
 
     override fun getRefreshKey(state: PagingState<Int, ListCharacter>): Int? {
@@ -19,7 +19,7 @@ class DataPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ListCharacter> {
         return try {
             val currentPage = params.key ?: 1
-            val response = remoteRepository.request(currentPage)
+            val response = dataCharacterUseCase.getCharacter(currentPage)
             LoadResult.Page(
                 response,
                 prevKey = null,

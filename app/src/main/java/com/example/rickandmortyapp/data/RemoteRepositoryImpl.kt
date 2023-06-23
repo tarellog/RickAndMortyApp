@@ -1,7 +1,6 @@
 package com.example.rickandmortyapp.data
 
 import com.example.rickandmortyapp.core.extansion.mapToListCharacter
-import com.example.rickandmortyapp.domain.RemoteRepository
 import com.example.rickandmortyapp.data.models.EpisodeModel
 import com.example.rickandmortyapp.domain.models.ListCharacter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -14,9 +13,9 @@ class RemoteRepositoryImpl (
     private val apiRickMortyService: RickMortyService
 ) : RemoteRepository {
 
-    override suspend fun request(page: Int): List<ListCharacter> {
+    override suspend fun getCharacter(page: Int): List<ListCharacter> {
         return withContext(Dispatchers.IO) {
-            apiRickMortyService.getApi(page).mapToListCharacter()
+            apiRickMortyService.getCharacter(page).mapToListCharacter()
         }
     }
 
