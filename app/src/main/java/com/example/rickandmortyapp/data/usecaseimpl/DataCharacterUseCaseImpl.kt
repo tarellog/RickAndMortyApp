@@ -8,8 +8,7 @@ class DataCharacterUseCaseImpl(
     private val remoteRepository: RemoteRepository
 ) : DataCharacterUseCase {
 
-    override suspend fun getCharacter(page: Int): List<ListCharacter> {
-        return remoteRepository.getCharacter(page)
-    }
+    override suspend fun getCharacter(page: Int): List<ListCharacter> =
+        remoteRepository.getCharacter(page)
 
 }

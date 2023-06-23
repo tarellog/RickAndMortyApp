@@ -7,15 +7,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rickandmortyapp.data.models.CharacterInfo
-import com.example.rickandmortyapp.data.RemoteRepository
 import com.example.rickandmortyapp.domain.BaseModel
 import com.example.rickandmortyapp.domain.models.ListCharacter
+import com.example.rickandmortyapp.domain.usecase.DataEpisodeUseCase
 import com.example.rickandmortyapp.feature.characterscreen.ui.CharacterFragment
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class EpisodeViewModel @Inject constructor(
-    private val repository: RemoteRepository
+    private val dataEpisodeUseCase: DataEpisodeUseCase
 ) : ViewModel() {
 
     private var _mainInfoLiveData = MutableLiveData<List<BaseModel>>()
@@ -26,7 +26,7 @@ class EpisodeViewModel @Inject constructor(
             try {
                 val dataForScreen = arguments.getParcelable<ListCharacter>(CharacterFragment.DATA_KEY)
                 dataForScreen?.let { data ->
-                    val listEpisode = repository.getEpisodes(data.getEpisodeList())
+                    val listEpisode = dataEpisodeUseCase.getEpisodes(data.getEpisodeList())
                     val resultList: MutableList<BaseModel> = listEpisode.toMutableList()
                     resultList.add(
                         0, CharacterInfo(
