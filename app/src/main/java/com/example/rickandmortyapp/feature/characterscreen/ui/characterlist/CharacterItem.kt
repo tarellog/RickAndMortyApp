@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -35,7 +34,6 @@ fun CharacterItem(
         modifier = modifier
             .padding(5.dp)
             .clip(RoundedCornerShape(20.dp))
-            .fillMaxSize()
             .background(colorResource(R.color.gray))
             .clickable { onCharacterClicked(characterModel) }
     ) {

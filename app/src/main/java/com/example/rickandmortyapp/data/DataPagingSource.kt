@@ -22,7 +22,7 @@ class DataPagingSource(
             val response = dataCharacterUseCase.getCharacter(currentPage)
             LoadResult.Page(
                 response,
-                prevKey = null,
+                prevKey = if (currentPage > 0) currentPage - 1 else null,
                 nextKey = if (response.isNotEmpty()) currentPage + 1 else null
             )
         } catch (e: Throwable) {

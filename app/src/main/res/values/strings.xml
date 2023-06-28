@@ -8,4 +8,6 @@
     <string name="episode">Episode: </string>
     <string name="episod">Episod: %1$d </string>
     <string name="character_title">Все персонажи</string>
+    <string name="error">Ошибка</string>
+    <string name="retry">Повторите попытку</string>
 </resources>

@@ -49,7 +49,7 @@ class CharacterFragment : Fragment() {
             val listCharacter = viewModel.characterPages
             CharacterScreen(
                 list = listCharacter,
-                onCharacterClicked = (::openSecondScreen)
+                onCharacterClicked = (::openSecondScreen),
             )
         }
 
