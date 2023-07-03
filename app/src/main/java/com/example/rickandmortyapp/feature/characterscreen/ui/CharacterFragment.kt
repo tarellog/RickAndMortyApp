@@ -6,12 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.ComposeView
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.rickandmortyapp.R
-import com.example.rickandmortyapp.core.ui.viewmodel.ViewModelFactory
 import com.example.rickandmortyapp.application.App
+import com.example.rickandmortyapp.core.ui.viewmodel.ViewModelFactory
 import com.example.rickandmortyapp.domain.models.ListCharacter
 import com.example.rickandmortyapp.feature.episodescreen.ui.EpisodeFragment
 import javax.inject.Inject
@@ -22,9 +23,6 @@ class CharacterFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private val viewModel: CharacterViewModel by viewModels {
-        viewModelFactory
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -46,9 +44,9 @@ class CharacterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         composeView.setContent {
-            val listCharacter = viewModel.characterPages
+            val viewModelFactory: () -> ViewModelProvider.Factory = remember { { viewModelFactory } }
             CharacterScreen(
-                list = listCharacter,
+                viewModelFactory = viewModelFactory,
                 onCharacterClicked = (::openSecondScreen),
             )
         }

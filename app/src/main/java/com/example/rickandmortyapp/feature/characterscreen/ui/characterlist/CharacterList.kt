@@ -8,24 +8,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
-import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.rickandmortyapp.R
-import com.example.rickandmortyapp.core.SampleData.flowFakeData
-import com.example.rickandmortyapp.core.SampleData.listData
 import com.example.rickandmortyapp.core.ui.compose.MainTitle
 import com.example.rickandmortyapp.domain.models.ListCharacter
 import com.example.rickandmortyapp.core.ui.compose.ErrorScreen
 import com.example.rickandmortyapp.core.ui.compose.LoadingScreen
-import kotlinx.coroutines.flow.Flow
+import com.example.rickandmortyapp.feature.characterscreen.ui.CharacterViewModel
 
 @Composable
 fun CharacterList(
-    listItem: Flow<PagingData<ListCharacter>>,
+    viewModel: CharacterViewModel,
     onCharacterClicked: (ListCharacter) -> Unit,
     onTitleClicked: () -> Unit
 ) {
-    val lazyPagingItems = listItem.collectAsLazyPagingItems()
+    val lazyPagingItems = viewModel.characterPages.collectAsLazyPagingItems()
     MainTitle(
         title = stringResource(id = R.string.character_title),
         onTitleClicked = { onTitleClicked() }
@@ -55,5 +52,5 @@ fun CharacterList(
 @Preview(showBackground = true)
 @Composable
 fun CharacterListPreview() {
-    CharacterList(listItem = flowFakeData, onCharacterClicked = { listData }, onTitleClicked = {})
+//    CharacterList( onTitleClicked = {})
 }

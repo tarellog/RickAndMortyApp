@@ -4,14 +4,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.paging.PagingData
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.rickandmortyapp.domain.models.ListCharacter
 import com.example.rickandmortyapp.feature.characterscreen.ui.characterlist.CharacterList
-import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun CharacterScreen(
-    list: Flow<PagingData<ListCharacter>>,
+    viewModelFactory: () -> ViewModelProvider.Factory,
+    viewModel: CharacterViewModel = viewModel(factory = viewModelFactory()),
     onCharacterClicked: (ListCharacter) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -19,7 +20,7 @@ fun CharacterScreen(
         modifier.fillMaxSize()
     ) {
         CharacterList(
-            listItem = list,
+            viewModel = viewModel,
             onCharacterClicked = onCharacterClicked,
             onTitleClicked = {},
         )
