@@ -1,28 +1,33 @@
 package com.example.rickandmortyapp.feature.characterscreen.ui.characterlist
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.rickandmortyapp.R
+import com.example.rickandmortyapp.core.SampleData.flowFakeData
 import com.example.rickandmortyapp.core.ui.compose.MainTitle
 import com.example.rickandmortyapp.domain.models.ListCharacter
 import com.example.rickandmortyapp.core.ui.compose.ErrorScreen
 import com.example.rickandmortyapp.core.ui.compose.LoadingScreen
-import com.example.rickandmortyapp.feature.characterscreen.ui.CharacterViewModel
+import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun CharacterList(
-    viewModel: CharacterViewModel,
+    listCharacter: Flow<PagingData<ListCharacter>>,
     onCharacterClicked: (ListCharacter) -> Unit,
-    onTitleClicked: () -> Unit
+    onTitleClicked: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    val lazyPagingItems = viewModel.characterPages.collectAsLazyPagingItems()
+    val lazyPagingItems = listCharacter.collectAsLazyPagingItems()
     MainTitle(
         title = stringResource(id = R.string.character_title),
         onTitleClicked = { onTitleClicked() }
@@ -52,5 +57,5 @@ fun CharacterList(
 @Preview(showBackground = true)
 @Composable
 fun CharacterListPreview() {
-//    CharacterList( onTitleClicked = {})
+    CharacterList(listCharacter = flowFakeData, onCharacterClicked = {}, onTitleClicked = {})
 }

@@ -19,8 +19,9 @@ fun CharacterScreen(
     Box(
         modifier.fillMaxSize()
     ) {
+        val listCharacter = viewModel.characterPages
         CharacterList(
-            viewModel = viewModel,
+            listCharacter = listCharacter,
             onCharacterClicked = onCharacterClicked,
             onTitleClicked = {},
         )

@@ -10,4 +10,14 @@
     <string name="character_title">Все персонажи</string>
     <string name="error">Ошибка</string>
     <string name="retry">Повторите попытку</string>
+
+    <!-- Description Character -->
+    <string name="name">Name: %1$s</string>
+    <string name="species">Species: %1$s</string>
+    <string name="gender">Gender: %1$s</string>
+    <string name="status">Status: %1$s</string>
+    <string name="location">Location: %1$s</string>
+    <string name="data">Data: %1$s</string>
+    <string name="series">Series: %1$s</string>
+
 </resources>

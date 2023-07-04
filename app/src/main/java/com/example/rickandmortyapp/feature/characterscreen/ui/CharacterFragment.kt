@@ -54,7 +54,8 @@ class CharacterFragment : Fragment() {
     }
 
     private fun openSecondScreen(model: ListCharacter) {
-        findNavController().navigate(R.id.action_generalFragment_to_secondFragment,
+        findNavController().navigate(
+            R.id.action_generalFragment_to_secondFragment,
             EpisodeFragment.dataForScreen(model)
         )
     }
