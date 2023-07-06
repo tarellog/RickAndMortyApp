@@ -12,7 +12,7 @@ class CharacterViewModel @Inject constructor(
 ) : ViewModel() {
 
     val characterPages = Pager(
-        PagingConfig(pageSize = 42),
+        PagingConfig(pageSize = 1),
     ) {
         DataPagingSource(dataCharacterUseCase)
     }.flow
