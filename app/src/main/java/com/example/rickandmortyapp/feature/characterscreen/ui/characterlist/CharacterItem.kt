@@ -15,21 +15,22 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.rickandmortyapp.domain.models.ListCharacter
-import com.example.rickandmortyapp.core.SampleData.listData
+import com.example.rickandmortyapp.navigation.Screens
 
 @Composable
 fun CharacterItem(
     characterModel: ListCharacter,
-    onCharacterClicked: (ListCharacter) -> Unit,
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         modifier = modifier
-            .clickable { onCharacterClicked(characterModel) }
+            .clickable { navController.navigate(Screens.Episode.route) }
     ) {
         Image(
             painter = rememberAsyncImagePainter(characterModel.image),
@@ -50,8 +51,8 @@ fun CharacterItem(
 @Preview(showBackground = true)
 @Composable
 fun CharacterItemPreview() {
-    CharacterItem(
-        characterModel = listData[2],
-        onCharacterClicked = { listData }
-    )
+//    CharacterItem(
+//        characterModel = listData[2],
+//        navController = { NavController() }
+//    )
 }

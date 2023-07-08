@@ -1,6 +1,5 @@
 package com.example.rickandmortyapp.data.models
 
-import com.example.rickandmortyapp.domain.BaseModel
 import com.google.gson.annotations.SerializedName
 
 data class EpisodeModel(
@@ -18,4 +17,4 @@ data class EpisodeModel(
     val url: String,
     @SerializedName("created")
     val created: String
-) : BaseModel
+)

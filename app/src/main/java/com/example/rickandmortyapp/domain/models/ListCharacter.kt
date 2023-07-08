@@ -7,6 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class ListCharacter(
     val page: Int,
+    val id: Int,
     val name: String,
     val status: String,
     val species: String,

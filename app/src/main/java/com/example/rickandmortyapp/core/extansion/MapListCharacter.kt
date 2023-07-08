@@ -7,6 +7,7 @@ fun CharacterModel.mapToListCharacter(): List<ListCharacter> =
     this.results.map { listCharacter ->
         ListCharacter(
             page = this.info.pages,
+            id = listCharacter.id,
             name = listCharacter.name,
             status = listCharacter.status,
             species = listCharacter.species,

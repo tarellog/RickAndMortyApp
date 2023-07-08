@@ -9,12 +9,10 @@ import android.view.ViewGroup
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.ComposeView
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.example.rickandmortyapp.R
+import androidx.navigation.compose.rememberNavController
 import com.example.rickandmortyapp.application.App
 import com.example.rickandmortyapp.core.ui.viewmodel.ViewModelFactory
-import com.example.rickandmortyapp.domain.models.ListCharacter
-import com.example.rickandmortyapp.feature.episodescreen.ui.EpisodeFragment
+import com.example.rickandmortyapp.navigation.NavGraph
 import javax.inject.Inject
 
 class CharacterFragment : Fragment() {
@@ -45,19 +43,13 @@ class CharacterFragment : Fragment() {
 
         composeView.setContent {
             val viewModelFactory: () -> ViewModelProvider.Factory = remember { { viewModelFactory } }
-            CharacterScreen(
-                viewModelFactory = viewModelFactory,
-                onCharacterClicked = (::openSecondScreen),
+            val navController = rememberNavController()
+            NavGraph(
+                navController = navController,
+                viewModelFactory = viewModelFactory
             )
         }
 
-    }
-
-    private fun openSecondScreen(model: ListCharacter) {
-        findNavController().navigate(
-            R.id.action_generalFragment_to_secondFragment,
-            EpisodeFragment.dataForScreen(model)
-        )
     }
 
     companion object {

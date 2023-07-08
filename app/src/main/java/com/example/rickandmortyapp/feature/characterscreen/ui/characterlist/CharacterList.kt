@@ -5,9 +5,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -20,8 +20,7 @@ import kotlinx.coroutines.flow.Flow
 @Composable
 fun CharacterList(
     listCharacter: Flow<PagingData<ListCharacter>>,
-    onCharacterClicked: (ListCharacter) -> Unit,
-    modifier: Modifier = Modifier
+    navController: NavController,
 ) {
     val lazyPagingItems = listCharacter.collectAsLazyPagingItems()
 
@@ -41,7 +40,7 @@ fun CharacterList(
             lazyPagingItems[item]?.let {
                 CharacterItem(
                     characterModel = it,
-                    onCharacterClicked = onCharacterClicked
+                    navController = navController
                 )
             }
         }
@@ -51,5 +50,5 @@ fun CharacterList(
 @Preview(showBackground = true)
 @Composable
 fun CharacterListPreview() {
-    CharacterList(listCharacter = flowFakeData, onCharacterClicked = {})
+//    CharacterList(listCharacter = flowFakeData, )
 }
