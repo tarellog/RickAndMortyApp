@@ -1,41 +1,29 @@
 package com.example.rickandmortyapp.feature.episodescreen.ui
 
-import android.os.Bundle
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.rickandmortyapp.data.models.CharacterInfo
-import com.example.rickandmortyapp.data.models.ListCharacterModel
-import com.example.rickandmortyapp.domain.RemoteRepository
-import com.example.rickandmortyapp.domain.BaseModel
-import com.example.rickandmortyapp.feature.characterscreen.ui.CharacterFragment
+import androidx.lifecycle.viewModelScope
+import com.example.rickandmortyapp.data.models.EpisodeModel
+import com.example.rickandmortyapp.domain.usecase.DataEpisodeUseCase
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class EpisodeViewModel @Inject constructor(
-    private val repository: RemoteRepository
+    private val dataEpisodeUseCase: DataEpisodeUseCase,
 ) : ViewModel() {
 
-    private var _mainInfoLiveData = MutableLiveData<List<BaseModel>>()
-    val mainInfoLiveData: LiveData<List<BaseModel>> get() = _mainInfoLiveData
+    private var _episodeList = MutableStateFlow<List<EpisodeModel>>(emptyList())
+    val episodeList get() = _episodeList
 
-    fun initByBundle(arguments: Bundle) {
-        val dataForScreen = arguments.getParcelable<ListCharacterModel>(CharacterFragment.DATA_KEY)
-        dataForScreen?.let { data ->
-            repository.getEpisodes(data.getEpisodeList())
-                .subscribe({
-                    val resultList: MutableList<BaseModel> = it.toMutableList()
-                    resultList.add(
-                        0, CharacterInfo(
-                            data.name,
-                            data.image,
-                            data.species,
-                            data.gender,
-                            data.status,
-                            data.location.name
-                        )
-                    )
-                    _mainInfoLiveData.postValue(resultList)
-                }) {}
+    fun initCharacterContent(episode: List<Int>) {
+        viewModelScope.launch {
+            try {
+                val episodeList = dataEpisodeUseCase.getEpisodes(episode)
+                _episodeList.tryEmit(episodeList)
+            } catch (e: Throwable) {
+                Log.e("MyTag", "Error", e)
+            }
         }
     }
 
