@@ -1,4 +1,4 @@
-package com.example.rickandmortyapp.data
+package com.example.rickandmortyapp.data.repository
 
 import com.example.rickandmortyapp.data.models.EpisodeModel
 import com.example.rickandmortyapp.domain.models.ListCharacter

@@ -1,6 +1,6 @@
 package com.example.rickandmortyapp.data.usecaseimpl
 
-import com.example.rickandmortyapp.data.RemoteRepository
+import com.example.rickandmortyapp.data.repository.RemoteRepository
 import com.example.rickandmortyapp.domain.models.ListCharacter
 import com.example.rickandmortyapp.domain.usecase.DataCharacterUseCase
 

@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import com.example.rickandmortyapp.core.const.LIST_CHARACTER
 import com.example.rickandmortyapp.domain.models.ListCharacter
 import com.example.rickandmortyapp.navigation.Screens
 
@@ -31,7 +32,7 @@ fun CharacterItem(
         verticalArrangement = Arrangement.Center,
         modifier = modifier
             .clickable {
-                navController.currentBackStackEntry?.savedStateHandle?.set("listcharacter", characterModel)
+                navController.currentBackStackEntry?.savedStateHandle?.set(LIST_CHARACTER, characterModel)
                 navController.navigate(Screens.Episode.route)
             }
     ) {
