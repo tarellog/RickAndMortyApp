@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.ComposeView
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
 import com.example.rickandmortyapp.application.App
 import com.example.rickandmortyapp.core.ui.viewmodel.ViewModelFactory
@@ -42,7 +41,7 @@ class CharacterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         composeView.setContent {
-            val viewModelFactory: () -> ViewModelProvider.Factory = remember { { viewModelFactory } }
+            val viewModelFactory: () -> ViewModelFactory = remember { { viewModelFactory } }
             val navController = rememberNavController()
             NavGraph(
                 navController = navController,
@@ -50,10 +49,6 @@ class CharacterFragment : Fragment() {
             )
         }
 
-    }
-
-    companion object {
-        const val DATA_KEY = "key"
     }
 
 }

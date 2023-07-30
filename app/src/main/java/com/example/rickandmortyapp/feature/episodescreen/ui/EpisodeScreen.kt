@@ -4,22 +4,24 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.lifecycle.ViewModelProvider
 import com.example.rickandmortyapp.feature.episodescreen.ui.episodelist.EpisodeList
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.rickandmortyapp.core.ui.viewmodel.ViewModelFactory
+import com.example.rickandmortyapp.domain.models.ListCharacter
 
 @Composable
 fun EpisodeScreen(
-    viewModelFactory: () -> ViewModelProvider.Factory,
-    viewModel: EpisodeViewModel = viewModel(factory = viewModelFactory())
+    characterData: ListCharacter,
+    viewModelFactory: () -> ViewModelFactory,
 ) {
-    val characterInfo by viewModel.characterInfo.collectAsState()
+    val viewModel: EpisodeViewModel = viewModel(factory = viewModelFactory())
     val episodeList by viewModel.episodeList.collectAsState()
+    viewModel.initCharacterContent(characterData.getEpisodeList())
 
     Scaffold {
         EpisodeList(
             episodeList = episodeList,
-            characterInfo = characterInfo,
+            characterData = characterData,
             padding = it
         )
     }

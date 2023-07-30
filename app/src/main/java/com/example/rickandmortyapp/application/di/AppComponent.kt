@@ -4,7 +4,6 @@ import com.example.rickandmortyapp.di.modules.ViewModelModule
 import com.example.rickandmortyapp.di.modules.NetworkModule
 import com.example.rickandmortyapp.di.modules.UseCaseModule
 import com.example.rickandmortyapp.feature.characterscreen.ui.CharacterFragment
-import com.example.rickandmortyapp.feature.episodescreen.ui.EpisodeFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -19,7 +18,5 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun inject(fragment: CharacterFragment)
-
-    fun inject(secondFragment: EpisodeFragment)
 
 }

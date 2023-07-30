@@ -30,7 +30,10 @@ fun CharacterItem(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         modifier = modifier
-            .clickable { navController.navigate(Screens.Episode.route) }
+            .clickable {
+                navController.currentBackStackEntry?.savedStateHandle?.set("listcharacter", characterModel)
+                navController.navigate(Screens.Episode.route)
+            }
     ) {
         Image(
             painter = rememberAsyncImagePainter(characterModel.image),

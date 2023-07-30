@@ -13,7 +13,7 @@ import com.example.rickandmortyapp.domain.models.ListCharacter
 @Composable
 fun EpisodeList(
     episodeList: List<EpisodeModel>,
-    characterInfo: List<ListCharacter>,
+    characterData: ListCharacter,
     padding: PaddingValues,
     modifier: Modifier = Modifier
 ) {
@@ -22,8 +22,8 @@ fun EpisodeList(
             .fillMaxSize()
             .padding(padding),
     ) {
-        items(characterInfo) {item ->
-            EpisodeHeader(listCharacter = item)
+        item {
+            EpisodeHeader(listCharacter = characterData)
         }
         items(episodeList) {item ->
             EpisodeItem(episodeModel = item)
