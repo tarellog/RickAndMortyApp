@@ -1,6 +1,7 @@
 package com.example.rickandmortyapp.feature.characterscreen.ui.characterlist
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,11 +13,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import com.example.rickandmortyapp.core.SampleData.listData
 import com.example.rickandmortyapp.core.const.LIST_CHARACTER
 import com.example.rickandmortyapp.domain.models.ListCharacter
 import com.example.rickandmortyapp.navigation.Screens
@@ -40,7 +44,8 @@ fun CharacterItem(
             painter = rememberAsyncImagePainter(characterModel.image),
             contentDescription = null,
             modifier = modifier
-                .size(160.dp)
+                .size(120.dp)
+                .border(1.dp, Color.Gray, RoundedCornerShape(20.dp))
                 .clip(RoundedCornerShape(20.dp))
         )
         Text(
@@ -55,8 +60,9 @@ fun CharacterItem(
 @Preview(showBackground = true)
 @Composable
 fun CharacterItemPreview() {
-//    CharacterItem(
-//        characterModel = listData[2],
-//        navController = { NavController() }
-//    )
+    val context = LocalContext.current
+    CharacterItem(
+        characterModel = listData[2],
+        navController = NavController(context)
+    )
 }

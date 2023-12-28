@@ -6,6 +6,7 @@ import com.example.rickandmortyapp.feature.characterscreen.ui.CharacterViewModel
 import com.example.rickandmortyapp.feature.episodescreen.ui.EpisodeViewModel
 import com.example.rickandmortyapp.core.ui.viewmodel.ViewModelKey
 import com.example.rickandmortyapp.core.ui.viewmodel.ViewModelFactory
+import com.example.rickandmortyapp.feature.mainscreen.MainViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -15,6 +16,11 @@ abstract class ViewModelModule {
 
     @Binds
     abstract fun provideViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
 
     @Binds
     @IntoMap
