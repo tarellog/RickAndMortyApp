@@ -1,8 +1,8 @@
 package com.example.rickandmortyapp.di.modules
 
-import com.example.rickandmortyapp.data.RemoteRepositoryImpl
+import com.example.rickandmortyapp.data.repository.RemoteRepositoryImpl
 import com.example.rickandmortyapp.data.RickMortyService
-import com.example.rickandmortyapp.data.RemoteRepository
+import com.example.rickandmortyapp.data.repository.RemoteRepository
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

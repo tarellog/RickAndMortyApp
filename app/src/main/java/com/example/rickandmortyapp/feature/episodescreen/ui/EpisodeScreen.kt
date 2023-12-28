@@ -25,5 +25,4 @@ fun EpisodeScreen(
             padding = it
         )
     }
-
 }

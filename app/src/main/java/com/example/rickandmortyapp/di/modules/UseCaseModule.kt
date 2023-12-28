@@ -1,6 +1,6 @@
 package com.example.rickandmortyapp.di.modules
 
-import com.example.rickandmortyapp.data.RemoteRepository
+import com.example.rickandmortyapp.data.repository.RemoteRepository
 import com.example.rickandmortyapp.data.usecaseimpl.DataCharacterUseCaseImpl
 import com.example.rickandmortyapp.data.usecaseimpl.DataEpisodeUseCaseImpl
 import com.example.rickandmortyapp.domain.usecase.DataCharacterUseCase

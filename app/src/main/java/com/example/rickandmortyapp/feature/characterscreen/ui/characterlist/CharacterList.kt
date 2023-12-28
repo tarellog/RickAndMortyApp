@@ -4,7 +4,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -23,6 +25,7 @@ fun CharacterList(
     navController: NavController,
 ) {
     val lazyPagingItems = listCharacter.collectAsLazyPagingItems()
+    val gridState = rememberLazyGridState()
 
     when (lazyPagingItems.loadState.refresh) {
         is LoadState.NotLoading -> Unit
@@ -35,6 +38,7 @@ fun CharacterList(
         contentPadding = PaddingValues(horizontal = 20.dp, vertical = 20.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
+        state = gridState
     ) {
         items(lazyPagingItems.itemCount) { item ->
             lazyPagingItems[item]?.let {
@@ -50,5 +54,8 @@ fun CharacterList(
 @Preview(showBackground = true)
 @Composable
 fun CharacterListPreview() {
-//    CharacterList(listCharacter = flowFakeData, )
+    CharacterList(
+        listCharacter = flowFakeData,
+        navController = NavController(LocalContext.current)
+    )
 }
