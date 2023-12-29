@@ -11,12 +11,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.rickandmortyapp.R
-import com.example.rickandmortyapp.data.models.EpisodeModel
+import com.example.rickandmortyapp.data.models.ListEpisodeModel
 
 @Composable
 fun EpisodeItem(
     modifier: Modifier = Modifier,
-    episodeModel: EpisodeModel
+    listEpisodeModel: ListEpisodeModel
 ) {
     Column(
         modifier = modifier
@@ -24,20 +24,20 @@ fun EpisodeItem(
             .padding(horizontal = 20.dp)
     ) {
         Text(
-            text = stringResource(id = R.string.episod, episodeModel.id),
+            text = stringResource(id = R.string.episod, listEpisodeModel.id),
             maxLines = 1,
             style = MaterialTheme.typography.displayLarge,
             fontSize = 20.sp
         )
         Text(
-            text = stringResource(id = R.string.series, episodeModel.name),
+            text = stringResource(id = R.string.series, listEpisodeModel.name),
             maxLines = 1,
             style = MaterialTheme.typography.displayLarge,
             fontSize = 20.sp
         )
         Text(
             modifier = modifier.padding(bottom = 10.dp),
-            text = stringResource(id = R.string.data, episodeModel.air_date),
+            text = stringResource(id = R.string.data, listEpisodeModel.air_date),
             style = MaterialTheme.typography.displayLarge,
             maxLines = 1,
             fontSize = 20.sp

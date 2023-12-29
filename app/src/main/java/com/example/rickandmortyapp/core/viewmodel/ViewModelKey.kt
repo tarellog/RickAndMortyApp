@@ -1,4 +1,4 @@
-package com.example.rickandmortyapp.core.ui.viewmodel
+package com.example.rickandmortyapp.core.viewmodel
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

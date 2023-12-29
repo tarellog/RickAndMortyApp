@@ -3,10 +3,10 @@ package com.example.rickandmortyapp.feature.characterscreen.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.rickandmortyapp.domain.models.ListCharacter
-import com.example.rickandmortyapp.domain.usecase.DataCharacterUseCase
+import com.example.rickandmortyapp.domain.usecase.CharacterUseCase
 
 class DataPagingSource(
-    private val dataCharacterUseCase: DataCharacterUseCase
+    private val characterUseCase: CharacterUseCase
 ) : PagingSource<Int, ListCharacter>() {
 
     override fun getRefreshKey(state: PagingState<Int, ListCharacter>): Int? {
@@ -16,7 +16,7 @@ class DataPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ListCharacter> {
         return try {
             val currentPage = params.key ?: 1
-            val response = dataCharacterUseCase.getCharacter(currentPage)
+            val response = characterUseCase.getCharacter(currentPage)
             LoadResult.Page(
                 response,
                 prevKey = null,

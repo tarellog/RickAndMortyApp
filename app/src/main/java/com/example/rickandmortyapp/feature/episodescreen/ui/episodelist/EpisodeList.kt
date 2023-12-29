@@ -8,12 +8,12 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.rickandmortyapp.data.models.EpisodeModel
+import com.example.rickandmortyapp.data.models.ListEpisodeModel
 import com.example.rickandmortyapp.domain.models.ListCharacter
 
 @Composable
 fun EpisodeList(
-    episodeList: List<EpisodeModel>,
+    episodeList: List<ListEpisodeModel>,
     characterData: ListCharacter,
     padding: PaddingValues,
     modifier: Modifier = Modifier
@@ -29,7 +29,7 @@ fun EpisodeList(
             EpisodeHeader(listCharacter = characterData)
         }
         items(episodeList) {item ->
-            EpisodeItem(episodeModel = item)
+            EpisodeItem(listEpisodeModel = item)
         }
     }
 }

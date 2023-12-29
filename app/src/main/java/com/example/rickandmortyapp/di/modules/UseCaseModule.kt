@@ -1,10 +1,12 @@
 package com.example.rickandmortyapp.di.modules
 
 import com.example.rickandmortyapp.data.repository.RemoteRepository
-import com.example.rickandmortyapp.data.usecaseimpl.DataCharacterUseCaseImpl
-import com.example.rickandmortyapp.data.usecaseimpl.DataEpisodeUseCaseImpl
-import com.example.rickandmortyapp.domain.usecase.DataCharacterUseCase
-import com.example.rickandmortyapp.domain.usecase.DataEpisodeUseCase
+import com.example.rickandmortyapp.data.usecaseimpl.CharacterUseCaseImpl
+import com.example.rickandmortyapp.data.usecaseimpl.EpisodeByCharacterUseCaseImpl
+import com.example.rickandmortyapp.data.usecaseimpl.EpisodeUseCaseImpl
+import com.example.rickandmortyapp.domain.usecase.CharacterUseCase
+import com.example.rickandmortyapp.domain.usecase.EpisodeByCharacterUseCase
+import com.example.rickandmortyapp.domain.usecase.EpisodeUseCase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -14,12 +16,16 @@ class UseCaseModule {
 
     @Singleton
     @Provides
-    fun providesDataCharacterUseCase(remoteRepository: RemoteRepository): DataCharacterUseCase =
-        DataCharacterUseCaseImpl(remoteRepository)
+    fun providesCharacterUseCase(remoteRepository: RemoteRepository): CharacterUseCase =
+        CharacterUseCaseImpl(remoteRepository)
 
     @Singleton
     @Provides
-    fun providesDataEpisodeUseCase(remoteRepository: RemoteRepository): DataEpisodeUseCase =
-        DataEpisodeUseCaseImpl(remoteRepository)
+    fun providesEpisodeByCharacterUseCase(remoteRepository: RemoteRepository): EpisodeByCharacterUseCase =
+        EpisodeByCharacterUseCaseImpl(remoteRepository)
+
+    @Provides
+    fun providesEpisodeUseCase(remoteRepository: RemoteRepository): EpisodeUseCase =
+        EpisodeUseCaseImpl(remoteRepository)
 
 }

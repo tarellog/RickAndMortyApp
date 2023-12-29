@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -29,12 +30,13 @@ import com.example.rickandmortyapp.navigation.Screens
 fun CharacterItem(
     characterModel: ListCharacter,
     navController: NavController,
-    modifier: Modifier = Modifier
+    sizeItem: Int = 130
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
-        modifier = modifier
+        modifier = Modifier
+            .width(sizeItem.dp)
             .clickable {
                 navController.currentBackStackEntry?.savedStateHandle?.set(LIST_CHARACTER, characterModel)
                 navController.navigate(Screens.Episode.route)
@@ -43,8 +45,8 @@ fun CharacterItem(
         Image(
             painter = rememberAsyncImagePainter(characterModel.image),
             contentDescription = null,
-            modifier = modifier
-                .size(120.dp)
+            modifier = Modifier
+                .size(sizeItem.dp)
                 .border(1.dp, Color.Gray, RoundedCornerShape(20.dp))
                 .clip(RoundedCornerShape(20.dp))
         )
@@ -52,7 +54,7 @@ fun CharacterItem(
             text = characterModel.name,
             textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = modifier.padding(top = 10.dp)
+            modifier = Modifier.padding(top = 10.dp)
         )
     }
 }
