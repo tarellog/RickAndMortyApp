@@ -6,7 +6,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.example.rickandmortyapp.feature.episodescreen.ui.episodelist.EpisodeList
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.rickandmortyapp.core.ui.viewmodel.ViewModelFactory
+import com.example.rickandmortyapp.core.viewmodel.ViewModelFactory
 import com.example.rickandmortyapp.domain.models.ListCharacter
 
 @Composable

@@ -5,7 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.rickandmortyapp.core.const.LIST_CHARACTER
-import com.example.rickandmortyapp.core.ui.viewmodel.ViewModelFactory
+import com.example.rickandmortyapp.core.viewmodel.ViewModelFactory
 import com.example.rickandmortyapp.domain.models.ListCharacter
 import com.example.rickandmortyapp.feature.characterscreen.ui.CharacterScreen
 import com.example.rickandmortyapp.feature.episodescreen.ui.EpisodeScreen

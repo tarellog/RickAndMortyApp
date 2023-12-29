@@ -15,8 +15,8 @@ import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.rickandmortyapp.core.SampleData.flowFakeData
 import com.example.rickandmortyapp.domain.models.ListCharacter
-import com.example.rickandmortyapp.core.ui.compose.ErrorScreen
-import com.example.rickandmortyapp.core.ui.compose.LoadingScreen
+import com.example.rickandmortyapp.core.ui.ErrorScreen
+import com.example.rickandmortyapp.core.ui.LoadingScreen
 import kotlinx.coroutines.flow.Flow
 
 @Composable

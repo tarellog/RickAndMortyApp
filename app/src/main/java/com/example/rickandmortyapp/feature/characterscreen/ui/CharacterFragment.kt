@@ -10,7 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.ComposeView
 import androidx.navigation.compose.rememberNavController
 import com.example.rickandmortyapp.application.App
-import com.example.rickandmortyapp.core.ui.viewmodel.ViewModelFactory
+import com.example.rickandmortyapp.core.viewmodel.ViewModelFactory
 import com.example.rickandmortyapp.navigation.NavGraph
 import javax.inject.Inject
 

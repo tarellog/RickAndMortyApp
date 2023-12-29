@@ -3,8 +3,8 @@ package com.example.rickandmortyapp.feature.mainscreen
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.rickandmortyapp.domain.models.ListCharacter
-import com.example.rickandmortyapp.domain.usecase.DataCharacterUseCase
+import com.example.rickandmortyapp.domain.usecase.CharacterUseCase
+import com.example.rickandmortyapp.domain.usecase.EpisodeUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,25 +12,44 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
-    private val dataCharacterUseCase: DataCharacterUseCase
+    private val characterUseCase: CharacterUseCase,
+    private val episodeUseCase: EpisodeUseCase,
 ) : ViewModel() {
 
-    private val _character = MutableStateFlow<List<ListCharacter>>(emptyList())
-    val character: StateFlow<List<ListCharacter>> = _character.asStateFlow()
+    private val _stateScreen = MutableStateFlow<StateMainScreen>(StateMainScreen.LoaderState)
+    val stateScreen: StateFlow<StateMainScreen> = _stateScreen.asStateFlow()
 
     init {
         getCharacter()
+//        getEpisodes()
     }
 
-    private fun getCharacter() {
+    fun getCharacter() {
         viewModelScope.launch {
+            _stateScreen.tryEmit(StateMainScreen.LoaderState)
             try {
-                val listCharacter = dataCharacterUseCase.getCharacter(1).take(6)
-                _character.tryEmit(listCharacter)
+                _stateScreen.tryEmit(
+                    StateMainScreen.Success(
+                        listCharacter = characterUseCase.getCharacter(1).take(8),
+                        listEpisodes = episodeUseCase.getAllEpisodes().take(8)
+                    )
+                )
             } catch (e: Exception) {
                 Log.e("error", "error", e)
+                _stateScreen.tryEmit(StateMainScreen.ErrorState)
             }
         }
     }
+//
+//    private fun getEpisodes() {
+//        viewModelScope.launch {
+//            try {
+//                val listEpisodes = episodeUseCase.getAllEpisodes().take(8)
+//                listEpisodes
+//            } catch (e: Exception) {
+//                Log.e("error", "error", e)
+//            }
+//        }
+//    }
 
 }

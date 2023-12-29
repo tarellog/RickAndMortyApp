@@ -1,9 +1,11 @@
 package com.example.rickandmortyapp.domain.models
 
 import android.os.Parcelable
+import androidx.compose.runtime.Immutable
 import com.example.rickandmortyapp.data.models.LocationCharacterModel
 import kotlinx.parcelize.Parcelize
 
+@Immutable
 @Parcelize
 data class ListCharacter(
     val page: Int,
